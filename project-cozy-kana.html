@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Kana - Project Details</title>
+
+    <!-- Global Stylesheet[cite: 38] -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome for UI, navigation, zoom, and social icons[cite: 38] -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ============================================================
+         EMBEDDED STYLES FOR FRAME 176, EMBEDDED DEMO & GALLERY
+    ============================================================ -->
+    <style>
+        /* ------------------------------------------------------------
+           1. CAROUSEL & SHOWCASE BOX
+        ------------------------------------------------------------ */
+        .main-showcase-box {
+            position: relative;
+            background-color: var(--active-pill, #E2CCB5);
+            border: 2px solid var(--charcoal, #343137);
+            border-radius: 24px;
+            height: 580px; /* Provides sufficient height for the mobile device frame */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 25px;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        /* Floating Top Toolbar (Live Toggle + Zoom Controls) */
+        .showcase-toolbar {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        /* Mode Switcher: Live Demo vs Screenshots */
+        .mode-toggle-group {
+            display: inline-flex;
+            background-color: rgba(255, 253, 252, 0.92);
+            backdrop-filter: blur(6px);
+            padding: 4px;
+            border-radius: 30px;
+            border: 1.5px solid var(--charcoal, #343137);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .mode-btn {
+            background: transparent;
+            border: none;
+            color: var(--charcoal, #343137);
+            font-family: var(--font-body, 'DM Sans', sans-serif);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .mode-btn.active-mode {
+            background-color: var(--charcoal, #343137);
+            color: #FFFDFC !important;
+        }
+
+        /* Zoom Toolbar (Visible only in Screenshot mode) */
+        .zoom-toolbar {
+            display: flex;
+            gap: 6px;
+            background-color: rgba(255, 253, 252, 0.92);
+            backdrop-filter: blur(6px);
+            padding: 4px 8px;
+            border-radius: 30px;
+            border: 1.5px solid var(--charcoal, #343137);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        .zoom-toolbar.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .zoom-btn {
+            background: transparent;
+            border: none;
+            color: var(--charcoal, #343137);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background-color 0.2s ease, transform 0.15s ease;
+        }
+
+        .zoom-btn:hover {
+            background-color: var(--active-pill, #E2CCB5);
+            transform: scale(1.1);
+        }
+
+        /* ------------------------------------------------------------
+           2. EMBEDDED LIVE APP CONTAINER (Adjusted to Fit Canvas Cleanly)
+        ------------------------------------------------------------ */
+        .live-app-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 15px;
+            z-index: 5;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .live-app-container.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* 
+           Adjusted Phone Mockup:
+           Widened to 375px (standard mobile device viewport) so the Kana rows 
+           and header switches render without horizontal truncation.
+        */
+        .phone-mockup-frame {
+            position: relative;
+            width: 375px;
+            max-width: 95%;
+            height: 520px;
+            background-color: #000;
+            border: 6px solid var(--charcoal, #343137);
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+        }
+
+        /* Speaker Notch */
+        .phone-mockup-frame::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55px;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.35);
+            border-radius: 4px;
+            z-index: 10;
+        }
+
+        .app-live-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #FFFDFC;
+        }
+
+        /* ------------------------------------------------------------
+           3. SCREENSHOT VIEWER & PAN CONTAINER
+        ------------------------------------------------------------ */
+        .showcase-display {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .showcase-display.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .zoom-viewport {
+            width: 100%;
+            height: 440px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-in;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .zoom-viewport.is-zoomed {
+            cursor: grab;
+        }
+
+        .zoom-viewport.is-grabbing {
+            cursor: grabbing !important;
+        }
+
+        #main-showcase-img {
+            max-height: 400px;
+            max-width: 85%;
+            object-fit: contain;
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+            transform-origin: center center;
+            transition: opacity 0.2s ease;
+            will-change: transform;
+            pointer-events: auto;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        #main-showcase-caption {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--charcoal, #343137);
+            text-align: center;
+            letter-spacing: 0.3px;
+            pointer-events: none;
+        }
+
+        /* Carousel Navigation Buttons */
+        .carousel-arrow {
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.75);
+            border: 1.5px solid var(--charcoal, #343137);
+            color: var(--charcoal, #343137);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            flex-shrink: 0;
+            transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+        }
+
+        .carousel-arrow.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .carousel-arrow:hover {
+            background-color: var(--charcoal, #343137);
+            color: #FFFDFC;
+            transform: scale(1.08);
+        }
+
+        /* ------------------------------------------------------------
+           4. THUMBNAIL SELECTOR STRIP
+        ------------------------------------------------------------ */
+        .thumbnail-strip {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            padding: 14px 4px 10px;
+            margin-top: 16px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .thumbnail-strip::-webkit-scrollbar {
+            height: 6px;
+        }
+        .thumbnail-strip::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+        .thumbnail-strip::-webkit-scrollbar-thumb {
+            background: var(--active-pill, #E2CCB5);
+            border-radius: 10px;
+        }
+
+        .thumb-box {
+            flex: 0 0 100px;
+            height: 130px;
+            background-color: var(--active-pill, #E2CCB5);
+            border: 1.5px solid var(--charcoal, #343137);
+            border-radius: 14px;
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .thumb-box img {
+            width: 100%;
+            height: 84px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: #FFFDFC;
+            pointer-events: none;
+        }
+
+        .thumb-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--charcoal, #343137);
+            margin-top: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 90px;
+            text-align: center;
+        }
+
+        .thumb-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .thumb-box.active-thumb {
+            border: 2.5px solid var(--charcoal, #343137);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
+            background-color: #D3B99E;
+        }
+
+        /* ------------------------------------------------------------
+           5. FRAME 176 PROJECT CARD & CONTENT STYLING
+        ------------------------------------------------------------ */
+        .project-detail-card {
+            background-color: var(--active-pill, #E2CCB5);
+            border: 2px solid var(--charcoal, #343137);
+            border-radius: 28px;
+            padding: 45px 50px;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .card-header-block {
+            margin-bottom: 25px;
+        }
+
+        .project-title-large {
+            font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--charcoal, #343137);
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+
+        .project-tagline {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--charcoal, #343137);
+            margin-bottom: 18px;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .card-tags .tag {
+            background-color: rgba(255, 253, 252, 0.65);
+            border: 1px solid var(--charcoal, #343137);
+            padding: 4px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--charcoal, #343137);
+        }
+
+        .project-brief-lead {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--charcoal, #343137);
+            max-width: 950px;
+            margin-bottom: 28px;
+        }
+
+        /* Action Buttons Row */
+        .project-action-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-bottom: 25px;
+            border-bottom: 1.5px solid rgba(52, 49, 55, 0.25);
+            margin-bottom: 35px;
+        }
+
+        .button-group-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-live-demo {
+            background-color: var(--charcoal, #343137);
+            color: #FFFDFC !important;
+            padding: 12px 28px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid var(--charcoal, #343137);
+            transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn-live-demo:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+            background-color: #242226;
+        }
+
+        .btn-github-repo {
+            background-color: transparent;
+            color: var(--charcoal, #343137) !important;
+            padding: 12px 28px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid var(--charcoal, #343137);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn-github-repo:hover {
+            transform: translateY(-2px);
+            background-color: rgba(255, 253, 252, 0.5);
+        }
+
+        /* Clean Summary / Collapse-All Toggle Button */
+        .summary-toggle-btn {
+            background: rgba(255, 253, 252, 0.7);
+            border: 1.5px solid var(--charcoal, #343137);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: var(--charcoal, #343137);
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+
+        .summary-toggle-btn:hover {
+            background-color: var(--charcoal, #343137);
+            color: #FFFDFC;
+            transform: scale(1.08);
+        }
+
+        .summary-toggle-icon {
+            font-size: 18px;
+            transition: transform 0.25s ease;
+        }
+
+        /* ------------------------------------------------------------
+           6. SECTION ACCORDIONS (Overview, Challenges, Features)
+        ------------------------------------------------------------ */
+        .detail-collapsible {
+            margin-bottom: 30px;
+        }
+
+        .section-header-btn {
+            width: 100%;
+            background: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            cursor: pointer;
+            color: var(--charcoal, #343137);
+            text-align: left;
+        }
+
+        .section-header-btn h2 {
+            font-family: var(--font-body, 'DM Sans', sans-serif);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--charcoal, #343137);
+            margin: 0;
+        }
+
+        .section-chevron {
+            font-size: 18px;
+            transition: transform 0.25s ease;
+        }
+
+        .detail-collapsible.is-collapsed .section-chevron {
+            transform: rotate(-90deg);
+        }
+
+        .section-body {
+            padding-top: 10px;
+            overflow: hidden;
+        }
+
+        .detail-collapsible.is-collapsed .section-body {
+            display: none;
+        }
+
+        .section-body p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--charcoal, #343137);
+        }
+
+        .content-list {
+            list-style-type: disc;
+            padding-left: 22px;
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--charcoal, #343137);
+        }
+
+        .content-list li {
+            margin-bottom: 14px;
+        }
+
+        .content-list strong {
+            font-weight: 600;
+        }
+
+        .content-list code {
+            background-color: rgba(52, 49, 55, 0.08);
+            color: var(--charcoal, #343137);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+
+        /* ------------------------------------------------------------
+           7. RESPONSIVE BREAKPOINTS
+        ------------------------------------------------------------ */
+        @media (max-width: 768px) {
+            .main-showcase-box {
+                height: 480px;
+                padding: 10px 15px;
+            }
+            .phone-mockup-frame {
+                width: 320px;
+                height: 430px;
+            }
+            .zoom-viewport {
+                height: 340px;
+            }
+            #main-showcase-img {
+                max-height: 310px;
+            }
+            .thumb-box {
+                flex: 0 0 85px;
+                height: 115px;
+            }
+            .thumb-box img {
+                height: 70px;
+            }
+            .project-detail-card {
+                padding: 30px 22px;
+            }
+            .project-title-large {
+                font-size: 36px;
+            }
+            .project-action-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .showcase-toolbar {
+                top: 10px;
+                right: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION BAR[cite: 38]
+    ============================================================ -->
+    <nav id="navbar">
+        <div class="logo">
+            <a href="index.html">Kerby Cruz</a>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="about.html" class="nav-item">About</a>
+            <a href="skills.html" class="nav-item">Skills</a>
+            <a href="projects.html" class="nav-item active">Projects</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+
+            <a href="#" class="btn-nav filled-dark" download>
+                Download CV
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         PROJECT DETAIL CONTAINER[cite: 38]
+    ============================================================ -->
+    <main class="container project-detail-container">
+
+        <!-- Back Link to return to Projects gallery[cite: 38] -->
+        <a href="projects.html" class="back-link" aria-label="Back to projects">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <!-- ========================================================
+             1. SHOWCASE BOX (EMBEDDED LIVE APP & SCREENSHOT VIEWER)
+        ======================================================== -->
+        <section class="gallery-wrapper">
+            
+            <div class="main-showcase-box">
+                <!-- Floating Top Toolbar: Mode Switcher + Zoom Controls -->
+                <div class="showcase-toolbar">
+                    <!-- Mode Switcher -->
+                    <div class="mode-toggle-group" role="tablist" aria-label="Showcase view modes">
+                        <button id="mode-live-btn" class="mode-btn active-mode" type="button" role="tab" aria-selected="true">
+                            <i class="fa-solid fa-play"></i> Live App
+                        </button>
+                        <button id="mode-shots-btn" class="mode-btn" type="button" role="tab" aria-selected="false">
+                            <i class="fa-solid fa-images"></i> Screenshots
+                        </button>
+                    </div>
+
+                    <!-- Zoom Controls (Enabled in Screenshot Mode) -->
+                    <div id="zoom-controls" class="zoom-toolbar is-hidden" role="toolbar" aria-label="Image zoom controls">
+                        <button id="zoom-in-btn" class="zoom-btn" type="button" title="Zoom In (+)" aria-label="Zoom In">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </button>
+                        <button id="zoom-out-btn" class="zoom-btn" type="button" title="Zoom Out (-)" aria-label="Zoom Out">
+                            <i class="fa-solid fa-magnifying-glass-minus"></i>
+                        </button>
+                        <button id="zoom-reset-btn" class="zoom-btn" type="button" title="Reset Zoom (1x)" aria-label="Reset Zoom">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Carousel Prev Arrow (Screenshots mode only) -->
+                <button id="carousel-prev" class="carousel-arrow prev-arrow is-hidden" type="button" aria-label="Previous screen">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+
+                <!-- VIEW A: Embedded Live Interactive Flutter Web App -->
+                <div id="live-app-view" class="live-app-container">
+                    <div class="phone-mockup-frame">
+                        <iframe id="flutter-app-iframe"
+                                src="https://tensaiker.github.io/kana_learning/" 
+                                title="Cozy Kana Live Interactive Web App" 
+                                class="app-live-iframe"
+                                loading="lazy"
+                                allow="autoplay; fullscreen">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- VIEW B: Screenshot Gallery with Zoom & Pan -->
+                <div id="shots-view" class="showcase-display is-hidden">
+                    <div id="zoom-viewport" class="zoom-viewport" title="Scroll to zoom, drag to move when zoomed">
+                        <img id="main-showcase-img" 
+                             src="assets/image/cozy_kana_project_image/cozy_kana_logo.png" 
+                             alt="Cozy Kana Logo"
+                             draggable="false">
+                    </div>
+                    <p id="main-showcase-caption">App Logo & Brand Identity</p>
+                </div>
+
+                <!-- Carousel Next Arrow (Screenshots mode only) -->
+                <button id="carousel-next" class="carousel-arrow next-arrow is-hidden" type="button" aria-label="Next screen">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Thumbnail Selector Strip (10 screens)[cite: 38] -->
+            <div class="thumbnail-strip" id="thumbnail-strip">
+                
+                <!-- 1. Logo[cite: 38] -->
+                <button type="button" class="thumb-box active-thumb"
+                        data-src="assets/image/cozy_kana_project_image/cozy_kana_logo.png"
+                        data-caption="App Logo & Brand Identity"
+                        aria-label="View Logo">
+                    <img src="assets/image/cozy_kana_project_image/cozy_kana_logo.png" alt="Logo">
+                    <span class="thumb-label">Logo</span>
+                </button>
+
+                <!-- 2. Home Tab[cite: 38] -->
+                <button type="button" class="thumb-box"
+                        data-src="assets/image/cozy_kana_project_image/Hometab.jpeg"
+                        data-caption="Home Tab: Daily streaks, quick stats & lesson entry"
+                        aria-label="View Home Tab">
+                    <img src="assets/image/cozy_kana_project_image/Hometab.jpeg" alt="Home Tab">
+                    <span class="thumb-label">Home</span>
+                </button>
+
+                <!-- 3. Learn Tab[cite: 38] -->
+                <button type="button" class="thumb-box"
+                        data-src="assets/image/cozy_kana_project_image/Learntab.jpeg"
+                        data-caption="Learn Tab: Structured Hiragana and Katakana progression"
+                        aria-label="View Learn Tab">
+                    <img src="assets/image/cozy_kana_project_image/Learntab.jpeg" alt="Learn Tab">
+                    <span class="thumb-label">Learn</span>
+                </button>
+
+                <!-- 4. Learn Writing[cite: 38] -->
+                <button type="button" class="thumb-box"
+                        data-src="assets/image/cozy_kana_project_image/Learntab_Writing.jpeg"
+                        data-caption="Learn Writing: Interactive stroke-order tracing canvas"
+                        aria-label="View Learn Writing">
+                    <img src="assets/image/cozy_kana_project_image/Learntab_Writing.jpeg" alt="Writing Canvas">
+                    <span class="thumb-label">Writing</span>
+                </button>
+
+                <!-- 5. Practice Flashcard Tab[cite: 38] -->
+                <button type="button" class="thumb-box"
+                        data-src="assets/image/cozy_kana_project_image/Practicetab_Flashcard.jpeg"
+                        data-caption="Practice Flashcard: 3D perspective SRS flip cards"
+                        aria-label="View Flashcard Tab">
+                    <img src="assets/image/cozy_kana_project_image/Practicetab_Flashcard.jpeg" alt="Flashcards">
+                    <span class="thumb-label">Flashcard</span>
+                </button>
+
+                <!-- 6. Practice Word Builder Tab[cite: 38] -->
+                <button type="button" class="thumb-box"
+                        data-src="assets/image/cozy_kana_project_image/Practicetab_wordbuilder.jpeg"
+                        data-caption="Practice Word Builder: Syllable assembly mini-game"
+                        aria-label="View Word Builder Tab">
+                    <img src="assets/image/cozy_kana_project_image/Practicetab_wordbuilder.jpeg" alt="Word Builder">
+                    <span class="thumb-label">Word Builder</span>
+                </button>
+
+                <!-- 7. Practice Vocab Tab[cite: 38] -->
+                <button type="button" class="thumb-box"
+                        data-src="assets/image/cozy_kana_project_image/Practicetab_Vocab.jpeg"
+                        data-caption="Practice Vocab: Searchable dictionary & audio pronunciation"
+                        aria-label="View Vocab Tab">
+                    <img src="assets/image/cozy_kana_project_image/Practicetab_Vocab.jpeg" alt="Vocab Tab">
+                    <span class="thumb-label">Vocab</span>
+                </button>
+
+                <!-- 8. Practice Quiz Tab[cite: 38] -->
+                <button type="button" class="thumb-box"
+                        data-src="assets/image/cozy_kana_project_image/Practicetab_quiz.jpeg"
+                        data-caption="Practice Quiz: Multi-choice Kana recognition assessments"
+                        aria-label="View Quiz Tab">
+                    <img src="assets/image/cozy_kana_project_image/Practicetab_quiz.jpeg" alt="Quiz Tab">
+                    <span class="thumb-label">Quiz</span>
+                </button>
+
+                <!-- 9. Progress Tab[cite: 38] -->
+                <button type="button" class="thumb-box"
+                        data-src="assets/image/cozy_kana_project_image/Progresstab.jpeg"
+                        data-caption="Progress Tab: Weekly heatmaps, retention & mastery analytics"
+                        aria-label="View Progress Tab">
+                    <img src="assets/image/cozy_kana_project_image/Progresstab.jpeg" alt="Progress Tab">
+                    <span class="thumb-label">Progress</span>
+                </button>
+
+                <!-- 10. Profile Tab[cite: 38] -->
+                <button type="button" class="thumb-box"
+                        data-src="assets/image/cozy_kana_project_image/Profiletab.jpeg"
+                        data-caption="Profile Tab: Audio settings, user preferences & dev tools"
+                        aria-label="View Profile Tab">
+                    <img src="assets/image/cozy_kana_project_image/Profiletab.jpeg" alt="Profile Tab">
+                    <span class="thumb-label">Profile</span>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
+             2. FRAME 176 DETAILED PROJECT CARD[cite: 38]
+        ======================================================== -->
+        <article class="project-detail-card">
+            
+            <!-- Header Block[cite: 38] -->
+            <div class="card-header-block">
+                <h1 class="project-title-large">Cozy Kana</h1>
+                <p class="project-tagline">Gamified Japanese Language Learning App</p>
+
+                <!-- Technology / Attribute Pills[cite: 38] -->
+                <div class="card-tags">
+                    <span class="tag">Flutter</span>
+                    <span class="tag">Dart</span>
+                    <span class="tag">App Dev</span>
+                    <span class="tag">E-Learning</span>
+                    <span class="tag">UI/UX Design</span>
+                    <span class="tag">2D & Tactile UI</span>
+                </div>
+
+                <!-- Brief Lead Summary Paragraph[cite: 38] -->
+                <p class="project-brief-lead">
+                    A tactile, gamified Japanese language learning application with structured lessons, handwriting practice, flashcards, vocabulary building, and progress tracking.[cite: 38]
+                </p>
+            </div>
+
+            <!-- Action Buttons & Clean Summary Toggle Row[cite: 38] -->
+            <div class="project-action-row">
+                <div class="button-group-left">
+                    <!-- Live Demo Link (Connected to GitHub Pages) -->
+                    <a href="https://tensaiker.github.io/kana_learning/" 
+                       class="btn-live-demo" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Open Cozy Kana live demo in a new tab">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+                    </a>
+
+                    <!-- GitHub Repository Link -->
+                    <a href="https://github.com/tensaiker/kana_learning" 
+                       class="btn-github-repo" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Open Cozy Kana GitHub source code repository">
+                        <i class="fa-brands fa-github"></i> GitHub Repository
+                    </a>
+                </div>
+
+                <!-- Clean Accordion Master Toggle (Annotation text removed) -->
+                <button id="toggle-summary-btn" 
+                        class="summary-toggle-btn" 
+                        type="button" 
+                        aria-expanded="true" 
+                        title="Toggle all sections" 
+                        aria-label="Toggle all sections">
+                    <i id="toggle-icon" class="fa-solid fa-arrow-down-short-wide summary-toggle-icon"></i>
+                </button>
+            </div>
+
+            <!-- ========================================================
+                 DETAILED SPECIFICATIONS (EXPANDABLE SECTIONS)[cite: 38]
+            ======================================================== -->
+            <div id="collapsible-sections-wrapper">
+
+                <!-- 1. Project Overview[cite: 38] -->
+                <section class="detail-collapsible" id="sec-overview">
+                    <button class="section-header-btn" type="button" aria-expanded="true">
+                        <h2>Project Overview</h2>
+                        <i class="fa-solid fa-chevron-down section-chevron"></i>
+                    </button>
+                    <div class="section-body">
+                        <p>
+                            A tactile, gamified Japanese language learning mobile application built with Flutter and Dart, designed to guide beginners through mastering Hiragana and Katakana.[cite: 38] Inspired by a cozy pastel stationery aesthetic, the app bridges stroke-by-stroke handwriting practice, spaced repetition (SRS) flashcards, dynamic vocabulary building, and reactive mastery tracking into an interactive learning journey.[cite: 38]
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 2. Challenges[cite: 38] -->
+                <section class="detail-collapsible" id="sec-challenges">
+                    <button class="section-header-btn" type="button" aria-expanded="true">
+                        <h2>Challenges</h2>
+                        <i class="fa-solid fa-chevron-down section-chevron"></i>
+                    </button>
+                    <div class="section-body">
+                        <ul class="content-list">
+                            <li>
+                                <strong>Dynamic Prerequisite Unlocking & State Synchronization:</strong> 
+                                Designing a unified state management architecture (<code>ProgressService</code> with <code>ListenableBuilder</code>) so that completing writing lessons or quizzes reactively updates row locks, streak flames, weekly calendars, and flashcard availability across multiple tabs without UI lag or manual page reloads.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Constrained Syllable & Word Filtering:</strong> 
+                                Implementing an algorithm in <code>VocabularyService</code> that filters hundreds of vocabulary words dynamically, ensuring learners are only quizzed on words composed purely of characters they have already unlocked in previous lessons.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Multi-Stage Handwriting Tracing:</strong> 
+                                Accurately resolving custom vector stroke paths and Unicode character variants (base, dakuon, handakuon, and small subscript yoon/sokuon) on a raw 2D canvas with real-time accuracy scoring.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Consistent Offline Audio Delivery:</strong> 
+                                Integrating native Text-to-Speech (<code>flutter_tts</code>) while maintaining user-configured speech rates, volume levels, and master sound toggles across disparate modes (quizzes, flashcard flips, vocabulary dictionary, and writing prompts).[cite: 38]
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 3. Key Features[cite: 38] -->
+                <section class="detail-collapsible" id="sec-features">
+                    <button class="section-header-btn" type="button" aria-expanded="true">
+                        <h2>Key Features</h2>
+                        <i class="fa-solid fa-chevron-down section-chevron"></i>
+                    </button>
+                    <div class="section-body">
+                        <ul class="content-list">
+                            <li>
+                                <strong>Sequential Lesson Progression:</strong> 
+                                Structured unlocking system spanning Basic Kana, Dakuon, and Yoon contracted sounds, complete with celebration animations when clearing milestones.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Interactive Stroke Tracing:</strong> 
+                                Real-time canvas for tracing kana characters with stroke order animations, vector path validation, and accuracy grading.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>SRS Flashcards & Difficulty Integration:</strong> 
+                                3D perspective flippable flashcards with 4-stage recall ratings (<em>Again, Hard, Good, Easy</em>) that tag characters directly for tailored quiz sessions.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Dynamic Word Builder Mini-Game:</strong> 
+                                Interactive syllable-tile assembly game with hints, instant TTS audio pronunciation, and difficulty adjustments based on unlocked kana.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Offline Vocabulary Library:</strong> 
+                                Searchable Japanese word bank with English definitions, syllable breakdowns, and locked-word prerequisite prompts.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Tactile 3D Stationery UI:</strong> 
+                                Custom design system featuring warm pastel cream/beige tones, mechanical button click depths, drop-shadow elevations, and haptic feedback.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Developer & Debug Toolkit:</strong> 
+                                Built-in dev panel in settings to simulate SRS ratings, toggle instant unlocks, and reset row checkpoints for live QA testing.[cite: 38]
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 4. What I Have Learned[cite: 38] -->
+                <section class="detail-collapsible" id="sec-learnings">
+                    <button class="section-header-btn" type="button" aria-expanded="true">
+                        <h2>What I Have Learned</h2>
+                        <i class="fa-solid fa-chevron-down section-chevron"></i>
+                    </button>
+                    <div class="section-body">
+                        <ul class="content-list">
+                            <li>
+                                <strong>Reactive State Architecture:</strong> 
+                                Implementing decoupled, persistent state management in Flutter using <code>ListenableBuilder</code> and <code>SharedPreferences</code> without introducing unnecessary third-party overhead.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Advanced Custom Canvas & Animations:</strong> 
+                                Managing touch input streams, vector interpolation, and custom matrix transformations (<code>Matrix4</code> 3D perspective flips and tactile button presses).[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Gamified Educational UX:</strong> 
+                                Designing intrinsic motivation loops (daily streak counters, weekly activity dot matrices, and mastery percentages) to prevent cognitive overload in language acquisition.[cite: 38]
+                            </li>
+                            <li>
+                                <strong>Clean Code & Service Layering:</strong> 
+                                Structuring an extensible codebase with dedicated service singletons (<code>ProgressService</code>, <code>VocabularyService</code>, <code>TactileFeedback</code>) to cleanly separate domain data from UI screens.[cite: 38]
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Global navigation script[cite: 38] -->
+    <script src="script.js"></script>
+
+    <!-- ============================================================
+         INTERACTIVE DEMO SWITCHER, ZOOM, DRAG & ACCORDION CONTROLLER[cite: 38]
+    ============================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mode Switcher Elements
+            const modeLiveBtn = document.getElementById('mode-live-btn');
+            const modeShotsBtn = document.getElementById('mode-shots-btn');
+            const liveAppView = document.getElementById('live-app-view');
+            const shotsView = document.getElementById('shots-view');
+            const zoomControls = document.getElementById('zoom-controls');
+            const prevBtn = document.getElementById('carousel-prev');
+            const nextBtn = document.getElementById('carousel-next');
+
+            // Screenshot Zoom & Pan Elements
+            const showcaseImg = document.getElementById('main-showcase-img');
+            const showcaseCaption = document.getElementById('main-showcase-caption');
+            const viewport = document.getElementById('zoom-viewport');
+            const thumbs = Array.from(document.querySelectorAll('#thumbnail-strip .thumb-box'));
+
+            const zoomInBtn = document.getElementById('zoom-in-btn');
+            const zoomOutBtn = document.getElementById('zoom-out-btn');
+            const zoomResetBtn = document.getElementById('zoom-reset-btn');
+
+            let isLiveMode = true;
+
+            function switchToLiveMode() {
+                isLiveMode = true;
+                modeLiveBtn.classList.add('active-mode');
+                modeShotsBtn.classList.remove('active-mode');
+
+                liveAppView.classList.remove('is-hidden');
+                shotsView.classList.add('is-hidden');
+                zoomControls.classList.add('is-hidden');
+                prevBtn.classList.add('is-hidden');
+                nextBtn.classList.add('is-hidden');
+            }
+
+            function switchToShotsMode() {
+                isLiveMode = false;
+                modeShotsBtn.classList.add('active-mode');
+                modeLiveBtn.classList.remove('active-mode');
+
+                liveAppView.classList.add('is-hidden');
+                shotsView.classList.remove('is-hidden');
+                zoomControls.classList.remove('is-hidden');
+                prevBtn.classList.remove('is-hidden');
+                nextBtn.classList.remove('is-hidden');
+            }
+
+            modeLiveBtn.addEventListener('click', switchToLiveMode);
+            modeShotsBtn.addEventListener('click', switchToShotsMode);
+
+            // --------------------------------------------------------
+            // ZOOM & PAN LOGIC[cite: 38]
+            // --------------------------------------------------------
+            let currentIndex = 0;
+            let currentScale = 1;
+            const minScale = 1;
+            const maxScale = 4.0;
+            const step = 0.4;
+
+            let isDragging = false;
+            let startPointerX = 0;
+            let startPointerY = 0;
+            let currentTranslateX = 0;
+            let currentTranslateY = 0;
+
+            showcaseImg.addEventListener('dragstart', (e) => e.preventDefault());
+
+            function updateTransform(withTransition = false) {
+                if (currentScale <= 1) {
+                    currentTranslateX = 0;
+                    currentTranslateY = 0;
+                    viewport.classList.remove('is-zoomed', 'is-grabbing');
+                } else {
+                    viewport.classList.add('is-zoomed');
+
+                    const maxTranslateX = (showcaseImg.offsetWidth * (currentScale - 1)) / 1.5;
+                    const maxTranslateY = (showcaseImg.offsetHeight * (currentScale - 1)) / 1.5;
+
+                    currentTranslateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, currentTranslateX));
+                    currentTranslateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, currentTranslateY));
+                }
+
+                showcaseImg.style.transition = withTransition ? 'transform 0.2s ease-out, opacity 0.2s ease' : 'none';
+                showcaseImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px) scale(${currentScale})`;
+            }
+
+            function setZoom(delta) {
+                const newScale = Math.min(maxScale, Math.max(minScale, currentScale + delta));
+                if (newScale !== currentScale) {
+                    currentScale = Number(newScale.toFixed(2));
+                    updateTransform(true);
+                }
+            }
+
+            function resetZoom() {
+                currentScale = 1;
+                currentTranslateX = 0;
+                currentTranslateY = 0;
+                updateTransform(true);
+            }
+
+            zoomInBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setZoom(step);
+            });
+
+            zoomOutBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setZoom(-step);
+            });
+
+            zoomResetBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                resetZoom();
+            });
+
+            viewport.addEventListener('dblclick', () => {
+                if (currentScale > 1) {
+                    resetZoom();
+                } else {
+                    currentScale = 2.2;
+                    updateTransform(true);
+                }
+            });
+
+            viewport.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY < 0 ? step : -step;
+                setZoom(delta);
+            }, { passive: false });
+
+            // Drag handling[cite: 38]
+            function onDragStart(clientX, clientY) {
+                if (currentScale <= 1) return;
+                isDragging = true;
+                startPointerX = clientX - currentTranslateX;
+                startPointerY = clientY - currentTranslateY;
+                viewport.classList.add('is-grabbing');
+            }
+
+            function onDragMove(clientX, clientY) {
+                if (!isDragging) return;
+                currentTranslateX = clientX - startPointerX;
+                currentTranslateY = clientY - startPointerY;
+                updateTransform(false);
+            }
+
+            function onDragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                viewport.classList.remove('is-grabbing');
+                updateTransform(true);
+            }
+
+            viewport.addEventListener('mousedown', (e) => {
+                if (currentScale > 1) {
+                    e.preventDefault();
+                    onDragStart(e.clientX, e.clientY);
+                }
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) onDragMove(e.clientX, e.clientY);
+            });
+
+            window.addEventListener('mouseup', onDragEnd);
+
+            viewport.addEventListener('touchstart', (e) => {
+                if (currentScale > 1 && e.touches.length === 1) {
+                    onDragStart(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches.length === 1) {
+                    onDragMove(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchend', onDragEnd);
+
+            // --------------------------------------------------------
+            // CAROUSEL & THUMBNAILS LOGIC[cite: 38]
+            // --------------------------------------------------------
+            function setGalleryItem(index) {
+                if (isLiveMode) switchToShotsMode();
+
+                resetZoom();
+
+                currentIndex = (index + thumbs.length) % thumbs.length;
+                const activeThumb = thumbs[currentIndex];
+
+                const newSrc = activeThumb.getAttribute('data-src');
+                const newCaption = activeThumb.getAttribute('data-caption');
+
+                showcaseImg.style.opacity = '0';
+
+                setTimeout(() => {
+                    showcaseImg.src = newSrc;
+                    showcaseImg.alt = newCaption;
+                    showcaseCaption.textContent = newCaption;
+                    showcaseImg.style.opacity = '1';
+                }, 140);
+
+                thumbs.forEach(t => t.classList.remove('active-thumb'));
+                activeThumb.classList.add('active-thumb');
+
+                activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+
+            thumbs.forEach((thumb, idx) => {
+                thumb.addEventListener('click', () => setGalleryItem(idx));
+            });
+
+            if (prevBtn) prevBtn.addEventListener('click', () => setGalleryItem(currentIndex - 1));
+            if (nextBtn) nextBtn.addEventListener('click', () => setGalleryItem(currentIndex + 1));
+
+            document.addEventListener('keydown', (e) => {
+                if (!isLiveMode) {
+                    if (e.key === 'ArrowLeft') setGalleryItem(currentIndex - 1);
+                    if (e.key === 'ArrowRight') setGalleryItem(currentIndex + 1);
+                }
+            });
+
+            // --------------------------------------------------------
+            // FRAME 176 ACCORDION / SUMMARY TOGGLE[cite: 38]
+            // --------------------------------------------------------
+            const summaryToggleBtn = document.getElementById('toggle-summary-btn');
+            const toggleIcon = document.getElementById('toggle-icon');
+            const sections = Array.from(document.querySelectorAll('.detail-collapsible'));
+
+            let allExpanded = true;
+
+            summaryToggleBtn.addEventListener('click', () => {
+                allExpanded = !allExpanded;
+
+                sections.forEach(sec => {
+                    if (allExpanded) {
+                        sec.classList.remove('is-collapsed');
+                    } else {
+                        sec.classList.add('is-collapsed');
+                    }
+                });
+
+                summaryToggleBtn.setAttribute('aria-expanded', allExpanded);
+                toggleIcon.style.transform = allExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+
+            sections.forEach(sec => {
+                const headerBtn = sec.querySelector('.section-header-btn');
+                headerBtn.addEventListener('click', () => {
+                    sec.classList.toggle('is-collapsed');
+                    headerBtn.setAttribute('aria-expanded', !sec.classList.contains('is-collapsed'));
+                });
+            });
+        });
+    </script>
+</body>
+</html>

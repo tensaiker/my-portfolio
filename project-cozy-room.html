@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Room Job Simulation - Kerby Cruz</title>
+
+    <!-- Link to your existing stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome for UI icons (back arrow, carousel arrows, placeholders) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION BAR
+         - "Projects" remains active with the warm tan pill
+    ============================================================ -->
+    <nav id="navbar">
+        <div class="logo">
+            <a href="index.html">Kerby Cruz</a>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="about.html" class="nav-item">About</a>
+            <a href="skills.html" class="nav-item">Skills</a>
+            <a href="projects.html" class="nav-item active">Projects</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+
+            <!-- Download CV Button -->
+            <a href="#" class="btn-nav filled-dark" download>
+                Download CV
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         PROJECT DETAIL CONTAINER
+    ============================================================ -->
+    <main class="container project-detail-container">
+
+        <!-- Back to Projects Button -->
+        <a href="projects.html" class="back-link" aria-label="Back to projects">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <!-- ========================================================
+             MEDIA GALLERY / CAROUSEL
+        ======================================================== -->
+        <section class="gallery-wrapper">
+            <!-- Large Main Showcase Box -->
+            <div class="main-showcase-box">
+                <!-- Previous Button -->
+                <button class="carousel-arrow prev-arrow" type="button" aria-label="Previous image">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+
+                <!-- 
+                    Main Media Placeholder:
+                    To display your 3D render or screenshot, replace the div with:
+                    <img src="assets/cozy-room-main.png" alt="Cozy Room Preview" class="showcase-img">
+                -->
+                <div class="icon-box-large">
+                    <i class="fa-regular fa-image"></i>
+                </div>
+
+                <!-- Next Button -->
+                <button class="carousel-arrow next-arrow" type="button" aria-label="Next image">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Thumbnail Strip Below Main Showcase -->
+            <div class="thumbnail-strip">
+                <div class="thumb-box active-thumb">
+                    <div class="thumb-icon"><i class="fa-regular fa-image"></i></div>
+                </div>
+                <div class="thumb-box">
+                    <div class="thumb-icon"><i class="fa-regular fa-image"></i></div>
+                </div>
+                <div class="thumb-box">
+                    <div class="thumb-icon"><i class="fa-regular fa-image"></i></div>
+                </div>
+                <div class="thumb-box">
+                    <div class="thumb-icon"><i class="fa-regular fa-image"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             PROJECT INFORMATION & SPECS (2-COLUMN GRID)
+        ======================================================== -->
+        <section class="project-info-section">
+            
+            <!-- Project Title -->
+            <h1 class="project-detail-title">Cozy Room Job Simulation</h1>
+
+            <!-- Technology / Category Pills -->
+            <div class="tags detail-tags">
+                <span class="tag">Unity</span>
+                <span class="tag">C#</span>
+                <span class="tag">Game Dev</span>
+                <span class="tag">3D</span>
+                <span class="tag">2D</span>
+            </div>
+
+            <!-- Two-Column Information Layout with Vertical Divider -->
+            <div class="project-columns">
+                
+                <!-- Left Column: Overview & Challenge -->
+                <div class="column-left">
+                    <div class="info-block">
+                        <h3>Overview</h3>
+                        <p>kasfhafaf</p>
+                    </div>
+
+                    <div class="info-block">
+                        <h3>Challenge</h3>
+                        <p>kasfhafaf</p>
+                    </div>
+                </div>
+
+                <!-- Vertical Divider Line -->
+                <div class="vertical-divider"></div>
+
+                <!-- Right Column: Key Features & Learnings -->
+                <div class="column-right">
+                    <div class="info-block">
+                        <h3>Key Features</h3>
+                        <ul class="bullet-list">
+                            <li>Gameplay system</li>
+                            <li>UI interactions</li>
+                            <li>Ingredient interaction</li>
+                            <li>Game logic</li>
+                            <li>User feedback</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-block">
+                        <h3>What I have Learned</h3>
+                        <ul class="bullet-list">
+                            <li>Unity game development basic</li>
+                            <li>C# scripting</li>
+                            <li>3D modelling</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Connect script.js to keep navigation active state responsive -->
+    <script src="script.js"></script>
+</body>
+</html>

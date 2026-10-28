@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerby Cruz - Skills</title>
+
+    <!-- Link to your stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome for UI icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION BAR
+         - Active brown pill applied to "Skills"
+    ============================================================ -->
+    <nav id="navbar">
+        <div class="logo">
+            <a href="index.html">Kerby Cruz</a>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="about.html" class="nav-item">About</a>
+            <!-- Active pill state on Skills -->
+            <a href="skills.html" class="nav-item active">Skills</a>
+            <a href="projects.html" class="nav-item">Projects</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+
+            <!-- Download CV Button -->
+            <a href="#" class="btn-nav" download>
+                <i class="fa-solid fa-download"></i> Download my CV
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         SKILLS & TECHNOLOGIES SECTION
+    ============================================================ -->
+    <section id="skills-page" class="container">
+        
+        <!-- Section Tag Badge & Main Title -->
+        <span class="pill brown-pill">My Skills</span>
+        <h2>Tools and Technologies</h2>
+
+        <!-- 2x2 Grid of Double-Layer Stacked Cards -->
+        <div class="skills-grid">
+
+            <!-- Card 1: Development (Sage Green) -->
+            <div class="skill-card card-green">
+                <h3>DEVELOPMENT</h3>
+                <ul>
+                    <li>Unity</li>
+                    <li>C#</li>
+                    <li>Flutter</li>
+                    <li>Dart</li>
+                </ul>
+            </div>
+
+            <!-- Card 2: Tools (Soft Lavender) -->
+            <div class="skill-card card-purple">
+                <h3>TOOLS</h3>
+                <ul class="two-col">
+                    <div>
+                        <li>Git</li>
+                        <li>Github</li>
+                        <li>VS Code</li>
+                        <li>Figma</li>
+                        <li>Blender</li>
+                    </div>
+                    <div>
+                        <li>Canva</li>
+                        <li>Notion</li>
+                        <li>Google Workplace</li>
+                    </div>
+                </ul>
+            </div>
+
+            <!-- Card 3: Accent Card (Butter Yellow) -->
+            <div class="skill-card card-yellow empty-card"></div>
+
+            <!-- Card 4: Accent Card (Dusty Rose) -->
+            <div class="skill-card card-pink empty-card"></div>
+
+        </div>
+    </section>
+
+    <!-- Navigation click handler -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerby Cruz - Portfolio</title>
+    <!-- Link to your updated stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for CV download icon & placeholders -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION BAR
+         - Default background: #FFFDFC (Soft White)[cite: 11]
+         - Clicking any item applies the .active brown pill[cite: 15]
+    ============================================================ -->
+    <nav id="navbar">
+        <div class="logo">
+            <a href="index.html">Kerby Cruz</a>
+        </div>
+
+        <div class="nav-links">
+            <!-- 
+                GUIDE: Use class="nav-item" on all links.
+                Add class="active" to denote the active page (Home on index.html, About on about.html, etc.).
+            -->
+            <a href="index.html" class="nav-item active">Home</a>
+            <a href="about.html" class="nav-item">About</a>
+            <a href="skills.html" class="nav-item">Skills</a>
+            <a href="projects.html" class="nav-item">Projects</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+
+            <!-- Download CV Button -->
+            <a href="#" class="btn-nav" download>
+                <i class="fa-solid fa-download"></i> Download my CV
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         HERO SECTION
+    ============================================================ -->
+    <section id="hero" class="container hero-grid">
+        <div class="hero-content">
+            <span class="pill outline">4th- Year IT Student</span>
+            <h1>I Build practical digital solutions with technology and curiosity.</h1>
+            <p>Focused on interactive applications, game with learning development and 3D modelling.</p>
+            <div class="hero-buttons">
+                <a href="projects.html" class="btn primary">View my projects &rarr;</a>
+                <a href="#" class="btn outline" download>
+                    <i class="fa-solid fa-download"></i> Download my CV
+                </a>
+            </div>
+            <div class="hero-footer">
+                <span>4th- Year IT Student</span>
+                <span>Philippines</span>
+                <span>Open to Internship</span>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="image-placeholder green-bg">
+                <i class="fa-regular fa-image fa-4x"></i>
+                <p>PHOTO</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect script.js to manage the active pill click states -->
+    <script src="script.js"></script>
+</body>
+</html>

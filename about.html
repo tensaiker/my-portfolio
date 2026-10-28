@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerby Cruz - About</title>
+    
+    <!-- Link to your stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome for UI and circle icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION BAR
+         - "About" retains the active warm brown pill highlight
+    ============================================================ -->
+    <nav id="navbar">
+        <div class="logo">
+            <a href="index.html">Kerby Cruz</a>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="about.html" class="nav-item active">About</a>
+            <a href="skills.html" class="nav-item">Skills</a>
+            <a href="projects.html" class="nav-item">Projects</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+
+            <!-- Download CV button -->
+            <a href="#" class="btn-nav" download>
+                <i class="fa-solid fa-download"></i> Download my CV
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         ABOUT SECTION
+         - Left Column: Headline and introduction
+         - Right Column: "Currently Learning" card with icons inside circles
+    ============================================================ -->
+    <main class="container about-grid">
+        
+        <!-- Left Column: Biography -->
+        <div class="about-content">
+            <span class="pill outline">About Me</span>
+            <h2>Technology is most interesting to me when it solves a real problem.</h2>
+            
+            <p class="description-label">Description:</p>
+            <p class="description-text">
+                I am a 4th-year IT student focused on interactive applications, 
+                game development with educational learning experiences, and 3D modeling. 
+                I enjoy building practical digital tools with curiosity and clean aesthetics.
+            </p>
+        </div>
+
+        <!-- Right Column: Currently Learning Nested Card -->
+        <div class="learning-outer-card">
+            <div class="learning-inner-card">
+                <h3>Currently Learning</h3>
+
+                <div class="learning-list">
+                    <!-- 1. Game Development (Green Circle + Gamepad Icon) -->
+                    <div class="learning-row align-right">
+                        <span class="pill green">Game Development</span>
+                        <span class="dot dot-green" title="Game Development">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </span>
+                    </div>
+
+                    <!-- 2. Application Development (Purple Circle + Mobile App Icon) -->
+                    <div class="learning-row align-left">
+                        <span class="dot dot-purple" title="Application Development">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                        </span>
+                        <span class="pill purple">Application Development</span>
+                    </div>
+
+                    <!-- 3. UI/UX Designer (Pink Circle + Pen Nib / Vector Icon) -->
+                    <div class="learning-row align-right">
+                        <span class="pill pink">UI/UX Designer</span>
+                        <span class="dot dot-pink" title="UI/UX Designer">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </span>
+                    </div>
+
+                    <!-- 4. 3D Modelling (Yellow Circle + 3D Cube Icon) -->
+                    <div class="learning-row align-left">
+                        <span class="dot dot-yellow" title="3D Modelling">
+                            <i class="fa-solid fa-cube"></i>
+                        </span>
+                        <span class="pill yellow">3D Modelling</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Connect script.js for nav active link handling -->
+    <script src="script.js"></script>
+</body>
+</html>
