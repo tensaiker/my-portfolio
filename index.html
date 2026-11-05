@@ -2,72 +2,416 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kerby Cruz - Portfolio</title>
-    <!-- Link to your updated stylesheet -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio featuring Flutter app development, Unity game projects, Blender 3D work, and e-commerce concepts.">
+    <meta name="theme-color" content="#F8F4EE">
+    <title>Kerby Cruz | IT Portfolio</title>
+    <!-- SHARED CSS: keep the original stylesheet, including Cozy Kana card styles. -->
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for CV download icon & placeholders -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js" defer></script>
 </head>
-<body>
+<body class="single-page-portfolio">
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <!-- ============================================================
-         NAVIGATION BAR
-         - Default background: #FFFDFC (Soft White)[cite: 11]
-         - Clicking any item applies the .active brown pill[cite: 15]
-    ============================================================ -->
-    <nav id="navbar">
-        <div class="logo">
-            <a href="index.html">Kerby Cruz</a>
-        </div>
-
-        <div class="nav-links">
-            <!-- 
-                GUIDE: Use class="nav-item" on all links.
-                Add class="active" to denote the active page (Home on index.html, About on about.html, etc.).
-            -->
-            <a href="index.html" class="nav-item active">Home</a>
-            <a href="about.html" class="nav-item">About</a>
-            <a href="skills.html" class="nav-item">Skills</a>
-            <a href="projects.html" class="nav-item">Projects</a>
-            <a href="contact.html" class="nav-item">Contact</a>
-
-            <!-- Download CV Button -->
-            <a href="#" class="btn-nav" download>
-                <i class="fa-solid fa-download"></i> Download my CV
-            </a>
+    <!-- NAVIGATION: all five links point to sections on this same page. -->
+    <nav id="navbar" class="site-nav" aria-label="Main navigation">
+        <a class="logo" href="#home">Kerby Cruz<span class="logo-period">.</span></a>
+        <button type="button" class="menu-toggle" id="menu-toggle"
+                aria-label="Open navigation menu" aria-controls="primary-nav" aria-expanded="false">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div id="primary-nav" class="nav-links">
+            <a href="#home" class="nav-item active" aria-current="location">Home</a>
+            <a href="#about" class="nav-item">About</a>
+            <a href="#skills" class="nav-item">Skills</a>
+            <a href="#projects" class="nav-item">Projects</a>
+            <a href="#contact" class="nav-item">Contact</a>
+            <!-- TODO: Replace #contact with assets/Kerby_Cruz_CV.pdf when your CV exists,
+                 then add the download attribute. For now, the button opens Contact. -->
+            <a href="#contact" class="btn-nav">Request CV <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
     </nav>
 
-    <!-- ============================================================
-         HERO SECTION
-    ============================================================ -->
-    <section id="hero" class="container hero-grid">
-        <div class="hero-content">
-            <span class="pill outline">4th- Year IT Student</span>
-            <h1>I Build practical digital solutions with technology and curiosity.</h1>
-            <p>Focused on interactive applications, game with learning development and 3D modelling.</p>
-            <div class="hero-buttons">
-                <a href="projects.html" class="btn primary">View my projects &rarr;</a>
-                <a href="#" class="btn outline" download>
-                    <i class="fa-solid fa-download"></i> Download my CV
-                </a>
+    <main id="main-content">
+        <!-- 01 / HOME: editorial hero, responsive image placeholder. -->
+        <section id="home" class="section hero-section" aria-labelledby="hero-heading">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <span class="eyebrow-pill"><i class="fa-solid fa-circle" aria-hidden="true"></i> 4th-Year IT Student · Open to Opportunities</span>
+                    <h1 id="hero-heading">I build practical digital experiences with <em>creativity and purpose.</em></h1>
+                    <p>Focused on interactive applications, educational game development, and 3D modeling—with thoughtful design at every step.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn primary">Explore Projects <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="#contact" class="btn outline">Get in Touch</a>
+                    </div>
+                    <div class="hero-footer"><span>APP DEVELOPMENT</span><span>GAME DEVELOPMENT</span><span>3D MODELING</span></div>
+                </div>
+                <!-- PHOTO GUIDE: replace this placeholder with your own portrait when ready.
+                     Example: <img src="assets/image/profile.jpg" alt="Portrait of Kerby Cruz"> -->
+                <div class="hero-portrait" aria-label="Profile image placeholder">
+                    <div class="portrait-inner"><i class="fa-regular fa-image" aria-hidden="true"></i><span>Your profile photo</span></div>
+                    <span class="portrait-caption">BUILD · LEARN · CREATE</span>
+                </div>
             </div>
-            <div class="hero-footer">
-                <span>4th- Year IT Student</span>
-                <span>Philippines</span>
-                <span>Open to Internship</span>
-            </div>
-        </div>
-        <div class="hero-image">
-            <div class="image-placeholder green-bg">
-                <i class="fa-regular fa-image fa-4x"></i>
-                <p>PHOTO</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Connect script.js to manage the active pill click states -->
-    <script src="script.js"></script>
+        <!-- 02 / ABOUT: preserved biography topic, improved concise wording. -->
+        <section id="about" class="section alternate-section" aria-labelledby="about-heading">
+            <div class="container">
+                <span class="pill brown-pill">About Me</span>
+                <div class="about-grid updated-about-grid">
+                    <div class="about-content">
+                        <h2 id="about-heading">Technology is most interesting when it <em>solves a real problem.</em></h2>
+                        <p class="section-lead">I'm a 4th-year Information Technology student who enjoys creating interactive applications, learning experiences, and 3D projects.</p>
+                        <p class="section-copy">My interests span application development, Unity game development, UI/UX design, and Blender. I value clear interfaces, practical problem-solving, and learning by building.</p>
+                        <a href="#projects" class="text-link">See what I'm building <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                    <aside class="learning-panel" aria-label="Current areas of learning">
+                        <span class="mini-label">MY FOCUS AREAS</span>
+                        <h3>Currently Exploring</h3>
+                        <div class="learning-items">
+                            <div><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span>Flutter &amp; Dart</span></div>
+                            <div><i class="fa-solid fa-gamepad" aria-hidden="true"></i><span>Unity &amp; C#</span></div>
+                            <div><i class="fa-solid fa-pen-ruler" aria-hidden="true"></i><span>UI/UX Design</span></div>
+                            <div><i class="fa-solid fa-cube" aria-hidden="true"></i><span>Blender 3D</span></div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 / SKILLS: four useful groups rather than two empty cards. -->
+        <section id="skills" class="section" aria-labelledby="skills-heading">
+            <div class="container">
+                <span class="pill brown-pill">My Skills</span>
+                <h2 id="skills-heading" class="section-heading">Tools &amp; Technologies</h2>
+                <p class="section-intro">Technologies I use or am actively learning through projects.</p>
+                <div class="skills-grid revised-skills-grid">
+                    <article class="skill-card skill-warm-one"><i class="fa-solid fa-code skill-icon" aria-hidden="true"></i><h3>Development</h3><ul><li>Flutter &amp; Dart</li><li>Unity &amp; C#</li><li>HTML, CSS &amp; JavaScript</li></ul></article>
+                    <article class="skill-card skill-warm-two"><i class="fa-solid fa-palette skill-icon" aria-hidden="true"></i><h3>Design &amp; 3D</h3><ul><li>Figma</li><li>Blender</li><li>Canva</li></ul></article>
+                    <article class="skill-card skill-warm-three"><i class="fa-solid fa-chart-column skill-icon" aria-hidden="true"></i><h3>Data &amp; Productivity</h3><ul><li>Excel &amp; Google Sheets</li><li>Google Workspace</li><li>Notion</li></ul></article>
+                    <article class="skill-card skill-warm-four"><i class="fa-solid fa-screwdriver-wrench skill-icon" aria-hidden="true"></i><h3>Developer Tools</h3><ul><li>VS Code</li><li>Git &amp; GitHub</li><li>Project documentation</li></ul></article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 / PROJECTS: content migrated from your revised projects.html.
+             Cozy Kana remains the featured card and opens its existing detail page.
+             All unfinished project cards remain in their original categories. -->
+        <section id="projects" class="section alternate-section" aria-labelledby="projects-heading">
+            <div class="container">
+                <span class="pill brown-pill">My Projects</span>
+                <h2 id="projects-heading" class="section-heading">Selected Work &amp; Experiments</h2>
+                <p class="section-intro">Applications, interactive games, 3D work, and e-commerce concepts. Project status labels distinguish work in progress from planned ideas.</p>
+        <!-- ========================================================
+             1. FEATURED PROJECT SECTION (COZY KANA WITH LOGO)
+        ======================================================== -->
+        <section class="project-group">
+            <h2 class="project-group-title">FEATURED PROJECT</h2>
+            
+            <!-- FEATURED COZY KANA: only this card uses the new wide layout. -->
+            <!-- IMAGE GUIDE: Keep the filenames exactly as they appear in assets/image/cozy_kana_project_image/. -->
+            <div class="featured-kana-layout">
+                <article class="featured-kana-card" aria-labelledby="kana-featured-title">
+                    <div class="featured-kana-media">
+                        <!-- The screenshot is a real project asset, not a placeholder. -->
+                        <img class="featured-kana-screen"
+                             src="assets/image/cozy_kana_project_image/Hometab.jpeg"
+                             alt="Cozy Kana application home screen"
+                             loading="lazy" decoding="async">
+                        <!-- App identity stays visible but does not obscure the screenshot. -->
+                        <img class="featured-kana-logo"
+                             src="assets/image/cozy_kana_project_image/cozy_kana_logo.png"
+                             alt="Cozy Kana logo"
+                             loading="lazy" decoding="async">
+                    </div>
+                    <div class="featured-kana-content">
+                        <span class="featured-kana-eyebrow">Featured Application</span>
+                        <h3 id="kana-featured-title">Cozy Kana</h3>
+                        <p class="featured-kana-subtitle">Gamified Japanese Learning Application</p>
+                        <p class="featured-kana-description">
+                            Cozy Kana helps beginners practice Hiragana and Katakana through
+                            guided lessons, handwriting activities, flashcards, vocabulary
+                            exercises, quizzes, and progress tracking.
+                        </p>
+                        <div class="tags" aria-label="Technologies and skills">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Dart</span>
+                            <span class="tag">E-Learning</span>
+                            <span class="tag">UI/UX Design</span>
+                        </div>
+                        <div class="featured-kana-footer">
+                            <span class="featured-kana-status">In Development</span>
+                            <!-- Opens the EXISTING project detail page; no other navigation is changed. -->
+                            <a class="featured-kana-link" href="project-cozy-kana.html">
+                                View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             2. DEVELOPMENT SECTION
+        ======================================================== -->
+        <section class="project-group">
+            <h2 class="project-group-title">DEVELOPMENT</h2>
+
+            <div class="projects-grid">
+                <!-- Card 1: Cozy Room Job Simulation -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Cozy Room Job Simulation</h3>
+                        <div class="tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Game Dev</span>
+                            <span class="tag">2D & 3D</span>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-pill yellow-status">On going</span>
+                            <a href="project-cozy-room.html" class="arrow-btn" aria-label="View Cozy Room Simulation Details">&rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2: Pizza Making Game -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Pizza Making Game</h3>
+                        <div class="tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Game Dev</span>
+                            <span class="tag">3D</span>
+                        </div>
+                        <div class="status-row right">
+                            <span class="status-pill red-status">Soon</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3: Farming Game -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Farming Game</h3>
+                        <div class="tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Game Dev</span>
+                            <span class="tag">Top down</span>
+                            <span class="tag">2D</span>
+                        </div>
+                        <div class="status-row right">
+                            <span class="status-pill red-status">Soon</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4: Hiragana and Katakana Learning App -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Hiragana And Katakana Learning Application</h3>
+                        <div class="tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Dart</span>
+                            <span class="tag">App Dev</span>
+                            <span class="tag">Learning</span>
+                            <span class="tag">Interactive</span>
+                        </div>
+                        <div class="status-row right">
+                            <span class="status-pill red-status">Soon</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 5: Hangul Learning Application -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Hangul Learning Application</h3>
+                        <div class="tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Dart</span>
+                            <span class="tag">App Dev</span>
+                            <span class="tag">Learning</span>
+                            <span class="tag">Interactive</span>
+                        </div>
+                        <div class="status-row right">
+                            <span class="status-pill red-status">Soon</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             3. 3D & BLENDER SECTION
+        ======================================================== -->
+        <section class="project-group">
+            <h2 class="project-group-title">3D & BLENDER</h2>
+
+            <div class="projects-grid">
+                <!-- 3D Card 1 -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Low-Poly Cozy Room</h3>
+                        <p class="card-desc">A low-poly environment modeled and rendered in Blender.</p>
+                        <div class="btn-row">
+                            <span class="view-pill-btn pending-link" aria-label="Project details coming soon">View 3D Project &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3D Card 2 -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Modern Pizza Shop</h3>
+                        <p class="card-desc">A low-poly modern pizza shop modeled and rendered in Blender.</p>
+                        <div class="btn-row">
+                            <span class="view-pill-btn pending-link" aria-label="Project details coming soon">View 3D Project &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3D Card 3 -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Modern Burger Shop</h3>
+                        <p class="card-desc">A low-poly modern burger shop modeled and rendered in Blender.</p>
+                        <div class="btn-row">
+                            <span class="view-pill-btn pending-link" aria-label="Project details coming soon">View 3D Project &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3D Card 4 -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Pizzeria</h3>
+                        <p class="card-desc">A low-poly pizzeria modeled and rendered in Blender.</p>
+                        <div class="btn-row">
+                            <span class="view-pill-btn pending-link" aria-label="Project details coming soon">View 3D Project &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3D Card 5 -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Coffee Shop</h3>
+                        <p class="card-desc">A low-poly coffee shop modeled and rendered in Blender.</p>
+                        <div class="btn-row">
+                            <span class="view-pill-btn pending-link" aria-label="Project details coming soon">View 3D Project &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             4. E-COMMERCE SECTION
+        ======================================================== -->
+        <section class="project-group">
+            <h2 class="project-group-title">E-COMMERCE</h2>
+
+            <div class="projects-grid">
+                <!-- E-Commerce Card 1 -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Shopify Store Mockup</h3>
+                        <p class="card-desc">A responsive e-commerce storefront concept focused on product presentation and user experience.</p>
+                        <div class="btn-row">
+                            <span class="view-pill-btn pending-link" aria-label="Project details coming soon">View Case Study &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- E-Commerce Card 2 -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Shopify Product Listing Mockup</h3>
+                        <p class="card-desc">Optimized single-product listing layout with conversion-focused UI components.</p>
+                        <div class="btn-row">
+                            <span class="view-pill-btn pending-link" aria-label="Project details coming soon">View Case Study &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- E-Commerce Card 3 -->
+                <article class="project-card">
+                    <div class="card-img">
+                        <div class="icon-box"><i class="fa-regular fa-image"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Shopify Product Research</h3>
+                        <p class="card-desc">Niche discovery, supplier vetting, and competitive market analysis methodology.</p>
+                        <div class="btn-row">
+                            <span class="view-pill-btn pending-link" aria-label="Project details coming soon">View Case Study &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+            </div>
+        </section>
+
+        <!-- 05 / CONTACT: replace all placeholders with real URLs when available. -->
+        <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
+            <div class="container">
+                <div class="contact-panel">
+                    <span class="pill brown-pill">Get in Touch</span>
+                    <h2 id="contact-heading">Let's build something <em>meaningful.</em></h2>
+                    <p>I'm open to internship opportunities, collaborations, and conversations about technology and creative projects.</p>
+                    <!-- TODO: Replace your.email@example.com with your real email. -->
+                    <a href="mailto:your.email@example.com" class="btn primary"><i class="fa-regular fa-envelope" aria-hidden="true"></i> Send an Email</a>
+                    <div class="contact-socials">
+                        <!-- TODO: Replace with your own public LinkedIn profile URL. -->
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+                        <!-- Optional: use a direct profile rather than GitHub's homepage. -->
+                        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer"><div class="container footer-inner"><span>© 2026 Kerby Cruz · Built with care.</span><a href="#home">Back to Top ↑</a></div></footer>
 </body>
 </html>
