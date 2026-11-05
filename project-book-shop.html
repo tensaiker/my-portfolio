@@ -1,86 +1,655 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- =====================================================
+         1. PAGE CONFIGURATION
+         ===================================================== -->
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <meta name="theme-color" content="#F8F4EE">
-    <meta name="description" content="Explore a low-poly book shop modeled in Blender as an interactive 3D scene.">
-    <title>Low-Poly Book Shop | 3D Project</title>
 
-    <!-- Reuse your existing design system. -->
+    <meta name="description"
+          content="Explore a low-poly book shop created in Blender through an interactive 3D viewer and isometric render.">
+
+    <title>Low-Poly Book Shop | Kerby Cruz</title>
+
+    <!--
+        GLOBAL STYLESHEET
+        Reuses your existing portfolio design.
+        Do not remove this link.
+    -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Official model-viewer library: rotate, zoom, and touch controls.
-         The site needs internet access to load this script. -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
+    <!--
+        FONT AWESOME
+        Used for navigation and showcase icons.
+    -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <!--
+        MODEL VIEWER LIBRARY
+
+        Loads the interactive 3D model component.
+
+        Features:
+        - Mouse rotation
+        - Touch rotation
+        - Zoom
+        - Automatic rotation
+        - GLB model support
+
+        IMPORTANT:
+        Internet access is required for this CDN script.
+    -->
+    <script
+        type="module"
+        src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js">
+    </script>
 </head>
+
 <body class="single-page-portfolio bookshop-detail-page">
+
+    <!-- =====================================================
+         2. NAVIGATION BAR
+         ===================================================== -->
+
     <nav class="site-nav" aria-label="Main navigation">
-        <a class="logo" href="index.html#home">Kerby Cruz<span class="logo-period">.</span></a>
-        <!-- Simple links here: no need to load script.js or alter your homepage menu. -->
+
+        <!-- Portfolio logo / Home link -->
+        <a class="logo" href="index.html#home">
+            Kerby Cruz<span class="logo-period">.</span>
+        </a>
+
+        <!-- Return to Projects section -->
         <div class="bookshop-back-navigation">
-            <a class="bookshop-back" href="index.html#projects" style="margin-bottom:0">
-                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Projects
+
+            <a
+                class="bookshop-back"
+                href="index.html#projects"
+                style="margin-bottom: 0;">
+
+                <i
+                    class="fa-solid fa-arrow-left"
+                    aria-hidden="true">
+                </i>
+
+                Back to Projects
             </a>
+
         </div>
     </nav>
 
+    <!-- =====================================================
+         3. MAIN PROJECT CONTENT
+         ===================================================== -->
+
     <main class="bookshop-main">
-        <a class="bookshop-back" href="index.html#projects">
-            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> All Projects
+
+        <!-- Back navigation -->
+        <a
+            class="bookshop-back"
+            href="index.html#projects">
+
+            <i
+                class="fa-solid fa-arrow-left"
+                aria-hidden="true">
+            </i>
+
+            All Projects
         </a>
-        <h1 class="bookshop-heading">Low-Poly Book Shop</h1>
-        <p class="bookshop-subtitle">A cozy environment modeled in Blender — explore it from every angle.</p>
-        <div class="bookshop-tags" aria-label="Project technologies">
-            <span>Blender</span><span>3D Modeling</span><span>Low Poly</span>
+
+        <!-- Project title -->
+        <h1 class="bookshop-heading">
+            Low-Poly Book Shop
+        </h1>
+
+        <!-- Project subtitle -->
+        <p class="bookshop-subtitle">
+            A cozy, stylized 3D environment modeled in Blender.
+            Explore the scene interactively or view its
+            isometric render.
+        </p>
+
+        <!-- Technology tags -->
+        <div
+            class="bookshop-tags"
+            aria-label="Project technologies">
+
+            <span>Blender</span>
+            <span>3D Modeling</span>
+            <span>Low Poly</span>
+
         </div>
 
-        <section class="bookshop-viewer-shell" aria-label="Interactive 3D book shop model">
-            <!-- IMPORTANT: This file name/path matches your VS Code screenshot exactly.
-                 Keep Book_Shop.glb inside assets/model/ (singular), next to assets/image/.
-                 If you rename it, update only the src value below.
+        <!-- =================================================
+             4. INTERACTIVE PROJECT SHOWCASE
 
-                 camera-controls = mouse/touch rotation and zoom
-                 auto-rotate = gently rotates until the visitor interacts
-                 loading=lazy = waits until viewer is near the viewport
-                 touch-action=pan-y = allows vertical page scrolling on mobile
-                 No AR: avoids claiming device-specific AR support. -->
-            <model-viewer
-                id="bookshop-model"
-                class="bookshop-viewer"
-                src="assets/model/Book_Shop.glb"
-                alt="Interactive low-poly book shop with a tiled roof, exterior staircase, fenced yard, and bookshelves"
-                camera-controls
-                auto-rotate
-                auto-rotate-delay="3000"
-                rotation-per-second="10deg"
-                interaction-prompt="auto"
-                touch-action="pan-y"
-                shadow-intensity="1"
-                exposure="1"
-                loading="lazy">
-                <div class="bookshop-loading" slot="poster">Loading 3D model…</div>
-            </model-viewer>
-            <div class="bookshop-hint">Drag to rotate · Scroll or pinch to zoom</div>
-            <div class="bookshop-error" id="bookshop-error" role="status">
-                The 3D model could not load. Check that <code>assets/model/Book_Shop.glb</code> exists and matches the filename exactly.
+             Contains two modes:
+
+             A. Live 3D Demo
+                Displays Book_Shop.glb.
+
+             B. Screenshots
+                Displays book-shop-render.png.
+
+             Both modes use the same showcase area.
+             ================================================= -->
+
+        <section
+            class="bookshop-demo-section"
+            aria-label="Book Shop project showcase">
+
+            <!-- =============================================
+                 4.1 SHOWCASE BUTTONS
+                 ============================================= -->
+
+            <div
+                class="bookshop-demo-tabs"
+                role="group"
+                aria-label="Choose showcase mode">
+
+                <!-- Default: Live 3D Demo -->
+                <button
+                    type="button"
+                    id="show-live"
+                    class="bookshop-demo-tab is-active"
+                    aria-pressed="true"
+                    aria-controls="live-panel">
+
+                    <i
+                        class="fa-solid fa-cube"
+                        aria-hidden="true">
+                    </i>
+
+                    Live 3D Demo
+                </button>
+
+                <!-- Switch to Blender render -->
+                <button
+                    type="button"
+                    id="show-screenshot"
+                    class="bookshop-demo-tab"
+                    aria-pressed="false"
+                    aria-controls="screenshot-panel">
+
+                    <i
+                        class="fa-solid fa-image"
+                        aria-hidden="true">
+                    </i>
+
+                    Screenshots
+                </button>
+
             </div>
+
+            <!-- =============================================
+                 4.2 PANEL A: LIVE 3D MODEL
+
+                 Model location:
+                 assets/model/Book_Shop.glb
+
+                 Keep the exact filename and capitalization.
+                 ============================================= -->
+
+            <div
+                id="live-panel"
+                class="bookshop-demo-panel">
+
+                <div class="bookshop-viewer-shell">
+
+                    <model-viewer
+                        id="bookshop-model"
+                        class="bookshop-viewer"
+
+                        src="assets/model/Book_Shop.glb"
+
+                        alt="Interactive low-poly book shop with a tiled roof, exterior staircase, rooftop terrace, and fenced yard"
+
+                        camera-controls
+                        auto-rotate
+                        auto-rotate-delay="3000"
+                        rotation-per-second="10deg"
+
+                        interaction-prompt="auto"
+                        touch-action="pan-y"
+
+                        shadow-intensity="1"
+                        exposure="1"
+
+                        loading="lazy">
+
+                        <!--
+                            Loading message.
+
+                            Displays while the GLB is being
+                            prepared by model-viewer.
+                        -->
+                        <div
+                            class="bookshop-loading"
+                            slot="poster">
+
+                            Loading 3D model…
+
+                        </div>
+
+                    </model-viewer>
+
+                    <!-- User instructions -->
+                    <p class="bookshop-hint">
+                        Drag to rotate · Scroll or pinch to zoom
+                    </p>
+
+                    <!--
+                        MODEL ERROR MESSAGE
+
+                        Hidden by your existing CSS.
+                        JavaScript adds .is-visible if
+                        the 3D model fails to load.
+                    -->
+                    <p
+                        class="bookshop-error"
+                        id="bookshop-error"
+                        role="status">
+
+                        The 3D model could not load.
+                        Please open the website through
+                        Live Server and verify that
+                        <code>assets/model/Book_Shop.glb</code>
+                        exists.
+
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- =============================================
+                 4.3 PANEL B: BLENDER RENDER
+
+                 CORRECT IMAGE LOCATION:
+
+                 assets/image/book_shop_image/
+                     book-shop-render.png
+
+                 The image is loaded when the visitor
+                 first opens the Screenshots tab.
+                 ============================================= -->
+
+            <div
+                id="screenshot-panel"
+                class="bookshop-demo-panel"
+                hidden>
+
+                <div class="bookshop-screenshot-wrap">
+
+                    <!--
+                        Blender isometric render.
+
+                        JavaScript assigns the src attribute
+                        when Screenshots is first opened.
+
+                        hidden prevents a blank image box
+                        before the image is loaded.
+                    -->
+                    <img
+                        id="bookshop-render"
+                        class="bookshop-render-image"
+                        alt="Isometric render of the low-poly Book Shop created in Blender"
+                        decoding="async"
+                        hidden
+                    >
+
+                    <!--
+                        Fallback message.
+
+                        This is only shown if the image
+                        cannot be loaded.
+                    -->
+                    <p
+                        id="bookshop-render-placeholder"
+                        class="bookshop-render-note"
+                        hidden>
+
+                        The Book Shop render could not
+                        be loaded. Please check:
+
+                        <code>
+                            assets/image/book_shop_image/book-shop-render.png
+                        </code>
+
+                    </p>
+
+                </div>
+            </div>
+
         </section>
 
-        <section class="bookshop-description" aria-labelledby="bookshop-about-heading">
-            <h2 id="bookshop-about-heading">About This Project</h2>
-            <p>This low-poly book shop scene explores stylized environment modeling, composition, and the presentation of 3D assets in an interactive web viewer.</p>
+        <!-- =================================================
+             5. PROJECT DESCRIPTION
+             ================================================= -->
+
+        <section
+            class="bookshop-description"
+            aria-labelledby="bookshop-about-heading">
+
+            <h2 id="bookshop-about-heading">
+                About This Project
+            </h2>
+
+            <p>
+                The Low-Poly Book Shop is a stylized 3D
+                environment created in Blender. It features
+                a warm wooden building, tiled roofing,
+                rooftop terrace, exterior staircase,
+                and surrounding landscape.
+
+                The project focuses on low-poly environment
+                modeling, composition, materials, and
+                presentation. Visitors can explore the
+                scene through an interactive 3D viewer
+                or examine its final isometric render.
+            </p>
+
         </section>
+
     </main>
 
-    <!-- Small, page-specific error handler; your other JavaScript remains untouched. -->
+    <!-- =====================================================
+         6. PAGE JAVASCRIPT
+
+         IMPORTANT:
+         This script only controls the Book Shop page.
+
+         It does NOT modify:
+         - script.js
+         - Cozy Kana
+         - Homepage navigation
+         - Other portfolio projects
+         ===================================================== -->
+
     <script>
-        const bookshopModel = document.getElementById('bookshop-model');
-        const bookshopError = document.getElementById('bookshop-error');
-        bookshopModel.addEventListener('error', () => {
-            bookshopError.classList.add('is-visible');
-        });
+        (() => {
+            'use strict';
+
+            // =============================================
+            // 6.1 ELEMENT REFERENCES
+            // =============================================
+
+            // Showcase buttons
+            const liveButton =
+                document.getElementById('show-live');
+
+            const screenshotButton =
+                document.getElementById('show-screenshot');
+
+            // Showcase panels
+            const livePanel =
+                document.getElementById('live-panel');
+
+            const screenshotPanel =
+                document.getElementById('screenshot-panel');
+
+            // Interactive 3D model
+            const model =
+                document.getElementById('bookshop-model');
+
+            // Model error message
+            const errorMessage =
+                document.getElementById('bookshop-error');
+
+            // Render image and fallback
+            const render =
+                document.getElementById('bookshop-render');
+
+            const renderPlaceholder =
+                document.getElementById(
+                    'bookshop-render-placeholder'
+                );
+
+            // =============================================
+            // 6.2 CONFIGURATION
+            // =============================================
+
+            /*
+                IMAGE PATH
+
+                Change this only if you move or rename
+                your Blender render file.
+            */
+            const RENDER_PATH =
+                'assets/image/book_shop_image/book-shop-render.png';
+
+            /*
+                Track whether the screenshot request
+                has already started.
+
+                This prevents repeated image downloads
+                when switching between tabs.
+            */
+            let screenshotRequested = false;
+
+            /*
+                Respect the visitor's reduced-motion
+                accessibility preference.
+            */
+            const reducedMotion =
+                window.matchMedia(
+                    '(prefers-reduced-motion: reduce)'
+                );
+
+            // =============================================
+            // 6.3 SCREENSHOT LOADING
+            // =============================================
+
+            function loadScreenshot() {
+
+                // Do not request the same image again.
+                if (screenshotRequested) {
+                    return;
+                }
+
+                screenshotRequested = true;
+
+                /*
+                    Load the Blender render only once.
+
+                    The screenshot panel displays an image
+                    after it loads successfully.
+                */
+                render.addEventListener(
+                    'load',
+                    () => {
+
+                        render.hidden = false;
+
+                        renderPlaceholder.hidden = true;
+
+                    },
+                    { once: true }
+                );
+
+                /*
+                    If the image fails, display the
+                    fallback message instead.
+                */
+                render.addEventListener(
+                    'error',
+                    () => {
+
+                        render.hidden = true;
+
+                        renderPlaceholder.hidden = false;
+
+                        console.error(
+                            'Book Shop render failed to load:',
+                            RENDER_PATH
+                        );
+
+                    },
+                    { once: true }
+                );
+
+                // Start loading the actual PNG.
+                render.src = RENDER_PATH;
+            }
+
+            // =============================================
+            // 6.4 SHOWCASE MODE SWITCHER
+            // =============================================
+
+            function showMode(mode) {
+
+                // Determine the selected mode.
+                const isLive = mode === 'live';
+
+                /*
+                    Show one panel at a time.
+
+                    hidden is a native HTML attribute
+                    and works with keyboard navigation.
+                */
+                livePanel.hidden = !isLive;
+
+                screenshotPanel.hidden = isLive;
+
+                /*
+                    Update active button styling.
+                */
+                liveButton.classList.toggle(
+                    'is-active',
+                    isLive
+                );
+
+                screenshotButton.classList.toggle(
+                    'is-active',
+                    !isLive
+                );
+
+                /*
+                    Update accessibility state.
+                */
+                liveButton.setAttribute(
+                    'aria-pressed',
+                    String(isLive)
+                );
+
+                screenshotButton.setAttribute(
+                    'aria-pressed',
+                    String(!isLive)
+                );
+
+                /*
+                    Pause automatic rotation while the
+                    Screenshots panel is selected.
+
+                    Also respect reduced-motion settings.
+                */
+                model.autoRotate =
+                    isLive && !reducedMotion.matches;
+
+                /*
+                    Only load the screenshot when the
+                    visitor first opens that panel.
+                */
+                if (!isLive) {
+                    loadScreenshot();
+                }
+            }
+
+            // =============================================
+            // 6.5 BUTTON EVENTS
+            // =============================================
+
+            liveButton.addEventListener(
+                'click',
+                () => showMode('live')
+            );
+
+            screenshotButton.addEventListener(
+                'click',
+                () => showMode('screenshot')
+            );
+
+            // =============================================
+            // 6.6 MODEL LOAD EVENTS
+            // =============================================
+
+            /*
+                Show the error message if the GLB
+                cannot load.
+            */
+            model.addEventListener(
+                'error',
+                (event) => {
+
+                    errorMessage.classList.add(
+                        'is-visible'
+                    );
+
+                    console.error(
+                        'Book Shop model loading error:',
+                        event.detail
+                    );
+
+                }
+            );
+
+            /*
+                Remove previous error messages
+                when the model loads successfully.
+            */
+            model.addEventListener(
+                'load',
+                () => {
+
+                    errorMessage.classList.remove(
+                        'is-visible'
+                    );
+
+                }
+            );
+
+            // =============================================
+            // 6.7 REDUCED MOTION UPDATES
+            // =============================================
+
+            /*
+                If the visitor changes their system's
+                motion preference, update auto-rotation.
+            */
+            const updateMotion = () => {
+
+                model.autoRotate =
+                    !livePanel.hidden &&
+                    !reducedMotion.matches;
+
+            };
+
+            if (reducedMotion.addEventListener) {
+
+                reducedMotion.addEventListener(
+                    'change',
+                    updateMotion
+                );
+
+            }
+
+            // =============================================
+            // 6.8 INITIAL STATE
+            // =============================================
+
+            // Start with the interactive 3D viewer.
+            showMode('live');
+
+        })();
     </script>
+
 </body>
 </html>

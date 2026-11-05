@@ -1379,73 +1379,239 @@ body.single-page-portfolio { background: var(--portfolio-ivory); color: var(--po
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 
-/* ================================================================
-   BOOK SHOP 3D PROJECT — scoped additions; other pages untouched.
-   ================================================================ */
+/* ==========================================================================
+   BOOK SHOP PROJECT — 3D MODEL AND SCREENSHOT SHOWCASE
+   Applies only to the Book Shop card and project-book-shop.html.
+
+   HOW TO USE
+   1. Keep assets/model/Book_Shop.glb in your project folder.
+   2. Keep assets/image/book_shop_image/book-shop-render.png for Screenshots.
+   3. project-book-shop.html handles button switching; CSS only controls layout.
+   4. Change the colors in the variables below to refine this page alone.
+   ========================================================================== */
+.bookshop-detail-page {
+    --bookshop-bg: #F8F4EE;
+    --bookshop-surface: #EFE4D6;
+    --bookshop-cream: #FFFCF8;
+    --bookshop-brown: #705440;
+    --bookshop-espresso: #392B25;
+    --bookshop-border: #C5A382;
+    background: var(--bookshop-bg);
+    color: var(--bookshop-espresso);
+}
+
+/* Homepage Book Shop card: do not modify other project cards. */
 .single-page-portfolio .bookshop-project-preview {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: #e5d4c1;
+    background: #E5D4C1;
     color: #705440;
 }
 .single-page-portfolio .bookshop-project-preview i { font-size: 48px; }
-.single-page-portfolio .bookshop-project-preview span { font-size: 13px; font-weight: 600; }
+.single-page-portfolio .bookshop-project-preview span {
+    font-size: 13px;
+    font-weight: 600;
+}
 .single-page-portfolio .bookshop-project-card .view-pill-btn {
-    background: #705440; color: #fffaf4; border-color: #705440;
+    background: #705440;
+    color: #FFFAF4;
+    border-color: #705440;
     text-align: center;
 }
 .single-page-portfolio .bookshop-project-card .view-pill-btn:hover {
-    background: #392b25;
+    background: #392B25;
 }
 
-/* Dedicated Book Shop page */
-.bookshop-detail-page { background: #f8f4ee; color: #392b25; }
+/* Project heading, navigation, and technology tags. */
 .bookshop-detail-page .bookshop-main {
-    max-width: 1120px; margin: 0 auto; padding: clamp(24px, 4vw, 60px) 20px 80px;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(24px, 4vw, 60px) 20px 80px;
 }
 .bookshop-detail-page .bookshop-back {
-    display: inline-flex; align-items: center; gap: 9px;
-    color: #705440; text-decoration: none; font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     margin-bottom: 28px;
+    color: var(--bookshop-brown);
+    font-size: 15px;
+    text-decoration: none;
 }
 .bookshop-detail-page .bookshop-back:hover { text-decoration: underline; }
-.bookshop-detail-page .bookshop-heading { margin: 0 0 10px; font-size: clamp(34px, 5vw, 52px); }
-.bookshop-detail-page .bookshop-subtitle { color: #705440; font-size: 16px; margin: 0 0 18px; }
-.bookshop-detail-page .bookshop-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
-.bookshop-detail-page .bookshop-tags span {
-    background: #efe4d6; border: 1px solid #c5a382; padding: 5px 12px;
-    border-radius: 100px; font-size: 12px; font-weight: 600;
+.bookshop-detail-page .bookshop-heading {
+    margin: 0 0 10px;
+    font-size: clamp(34px, 5vw, 52px);
 }
+.bookshop-detail-page .bookshop-subtitle {
+    margin: 0 0 18px;
+    color: var(--bookshop-brown);
+    font-size: 16px;
+}
+.bookshop-detail-page .bookshop-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 26px;
+}
+.bookshop-detail-page .bookshop-tags span {
+    padding: 5px 12px;
+    background: var(--bookshop-surface);
+    border: 1px solid var(--bookshop-border);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Mode buttons: the HTML updates .is-active and aria-pressed. */
+.bookshop-detail-page .bookshop-demo-tabs {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+.bookshop-detail-page .bookshop-demo-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid var(--bookshop-border);
+    border-radius: 999px;
+    background: var(--bookshop-cream);
+    color: var(--bookshop-espresso);
+    font: 600 14px var(--font-body, sans-serif);
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+.bookshop-detail-page .bookshop-demo-tab:hover:not(.is-active) {
+    background: #E8D9C6;
+}
+.bookshop-detail-page .bookshop-demo-tab.is-active {
+    background: var(--bookshop-brown);
+    color: #FFFFFF;
+    border-color: var(--bookshop-brown);
+}
+.bookshop-detail-page .bookshop-demo-tab:focus-visible {
+    outline: 3px solid var(--bookshop-border);
+    outline-offset: 3px;
+}
+
+/* IMPORTANT: Override display rules on inactive panels and images.
+   Without this, a hidden screenshot may still occupy the viewer area. */
+.bookshop-detail-page .bookshop-demo-panel[hidden],
+.bookshop-detail-page #bookshop-render[hidden],
+.bookshop-detail-page #bookshop-render-placeholder[hidden] {
+    display: none !important;
+}
+
+/* Interactive GLB viewer; the custom <model-viewer> element fills this area. */
 .bookshop-detail-page .bookshop-viewer-shell {
-    position: relative; background: #efe4d6; border: 1px solid #c5a382;
-    border-radius: 24px; overflow: hidden;
+    overflow: hidden;
+    background: var(--bookshop-surface);
+    border: 1px solid var(--bookshop-border);
+    border-radius: 24px;
 }
 .bookshop-detail-page .bookshop-viewer {
-    display: block; width: 100%; height: min(70vh, 630px); min-height: 360px;
-    background: #efe4d6; --poster-color: #efe4d6;
+    display: block;
+    width: 100%;
+    height: min(70vh, 630px);
+    min-height: 360px;
+    background: var(--bookshop-surface);
+    --poster-color: var(--bookshop-surface);
 }
 .bookshop-detail-page .bookshop-loading {
-    color: #705440; font-size: 15px; padding: 20px; text-align: center;
+    padding: 20px;
+    color: var(--bookshop-brown);
+    font-size: 15px;
+    text-align: center;
 }
 .bookshop-detail-page .bookshop-hint {
-    padding: 14px 18px; text-align: center; font-size: 14px;
-    color: #705440; border-top: 1px solid #c5a382;
+    padding: 14px 18px;
+    border-top: 1px solid var(--bookshop-border);
+    color: var(--bookshop-brown);
+    font-size: 14px;
+    text-align: center;
 }
-.bookshop-detail-page .bookshop-description {
-    max-width: 760px; margin-top: 40px; color: #705440;
-    font-size: 16px; line-height: 1.75;
-}
-.bookshop-detail-page .bookshop-description h2 { margin-bottom: 10px; font-size: 28px; }
 .bookshop-detail-page .bookshop-error {
-    display: none; padding: 12px 16px; background: #fff9f2;
-    color: #6b342a; border-top: 1px solid #c5a382; font-size: 14px;
+    display: none;
+    padding: 12px 16px;
+    background: #FFF9F2;
+    border-top: 1px solid var(--bookshop-border);
+    color: #6B342A;
+    font-size: 14px;
 }
 .bookshop-detail-page .bookshop-error.is-visible { display: block; }
-@media (max-width: 600px) {
-    .bookshop-detail-page .bookshop-viewer { height: 440px; min-height: 320px; }
-    .bookshop-detail-page .bookshop-viewer-shell { border-radius: 16px; }
+
+/* Screenshot panel: show the COMPLETE isometric render without cropping. */
+.bookshop-detail-page .bookshop-screenshot-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+    padding: 20px;
+    background: var(--bookshop-surface);
+    border: 1px solid var(--bookshop-border);
+    border-radius: 24px;
 }
+.bookshop-detail-page #bookshop-render {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 14px;
+}
+.bookshop-detail-page .bookshop-render-note {
+    max-width: 560px;
+    color: var(--bookshop-brown);
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+/* Project explanation underneath the interactive showcase. */
+.bookshop-detail-page .bookshop-description {
+    max-width: 760px;
+    margin-top: 40px;
+    color: var(--bookshop-brown);
+    font-size: 16px;
+    line-height: 1.75;
+}
+.bookshop-detail-page .bookshop-description h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+/* Smaller viewports: keep the tabs reachable and the viewer usable. */
+@media (max-width: 600px) {
+    .bookshop-detail-page .bookshop-demo-tabs { flex-wrap: nowrap; }
+    .bookshop-detail-page .bookshop-demo-tab {
+        flex: 1 1 0;
+        min-width: 0;
+        padding-inline: 9px;
+        font-size: 12px;
+    }
+    .bookshop-detail-page .bookshop-viewer {
+        height: 440px;
+        min-height: 320px;
+    }
+    .bookshop-detail-page .bookshop-viewer-shell,
+    .bookshop-detail-page .bookshop-screenshot-wrap {
+        border-radius: 16px;
+    }
+    .bookshop-detail-page .bookshop-screenshot-wrap {
+        min-height: 260px;
+        padding: 12px;
+    }
+    .bookshop-detail-page #bookshop-render { max-height: 380px; }
+}
+
+/* Skip non-essential transitions for users who prefer less motion. */
 @media (prefers-reduced-motion: reduce) {
-    .bookshop-detail-page .bookshop-viewer { scroll-behavior: auto; }
+    .bookshop-detail-page .bookshop-demo-tab { transition: none; }
 }
