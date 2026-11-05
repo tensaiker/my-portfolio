@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F8F4EE">
+    <meta name="description" content="Explore a low-poly book shop modeled in Blender as an interactive 3D scene.">
+    <title>Low-Poly Book Shop | 3D Project</title>
+
+    <!-- Reuse your existing design system. -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Official model-viewer library: rotate, zoom, and touch controls.
+         The site needs internet access to load this script. -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
+</head>
+<body class="single-page-portfolio bookshop-detail-page">
+    <nav class="site-nav" aria-label="Main navigation">
+        <a class="logo" href="index.html#home">Kerby Cruz<span class="logo-period">.</span></a>
+        <!-- Simple links here: no need to load script.js or alter your homepage menu. -->
+        <div class="bookshop-back-navigation">
+            <a class="bookshop-back" href="index.html#projects" style="margin-bottom:0">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Projects
+            </a>
+        </div>
+    </nav>
+
+    <main class="bookshop-main">
+        <a class="bookshop-back" href="index.html#projects">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> All Projects
+        </a>
+        <h1 class="bookshop-heading">Low-Poly Book Shop</h1>
+        <p class="bookshop-subtitle">A cozy environment modeled in Blender — explore it from every angle.</p>
+        <div class="bookshop-tags" aria-label="Project technologies">
+            <span>Blender</span><span>3D Modeling</span><span>Low Poly</span>
+        </div>
+
+        <section class="bookshop-viewer-shell" aria-label="Interactive 3D book shop model">
+            <!-- IMPORTANT: This file name/path matches your VS Code screenshot exactly.
+                 Keep Book_Shop.glb inside assets/model/ (singular), next to assets/image/.
+                 If you rename it, update only the src value below.
+
+                 camera-controls = mouse/touch rotation and zoom
+                 auto-rotate = gently rotates until the visitor interacts
+                 loading=lazy = waits until viewer is near the viewport
+                 touch-action=pan-y = allows vertical page scrolling on mobile
+                 No AR: avoids claiming device-specific AR support. -->
+            <model-viewer
+                id="bookshop-model"
+                class="bookshop-viewer"
+                src="assets/model/Book_Shop.glb"
+                alt="Interactive low-poly book shop with a tiled roof, exterior staircase, fenced yard, and bookshelves"
+                camera-controls
+                auto-rotate
+                auto-rotate-delay="3000"
+                rotation-per-second="10deg"
+                interaction-prompt="auto"
+                touch-action="pan-y"
+                shadow-intensity="1"
+                exposure="1"
+                loading="lazy">
+                <div class="bookshop-loading" slot="poster">Loading 3D model…</div>
+            </model-viewer>
+            <div class="bookshop-hint">Drag to rotate · Scroll or pinch to zoom</div>
+            <div class="bookshop-error" id="bookshop-error" role="status">
+                The 3D model could not load. Check that <code>assets/model/Book_Shop.glb</code> exists and matches the filename exactly.
+            </div>
+        </section>
+
+        <section class="bookshop-description" aria-labelledby="bookshop-about-heading">
+            <h2 id="bookshop-about-heading">About This Project</h2>
+            <p>This low-poly book shop scene explores stylized environment modeling, composition, and the presentation of 3D assets in an interactive web viewer.</p>
+        </section>
+    </main>
+
+    <!-- Small, page-specific error handler; your other JavaScript remains untouched. -->
+    <script>
+        const bookshopModel = document.getElementById('bookshop-model');
+        const bookshopError = document.getElementById('bookshop-error');
+        bookshopModel.addEventListener('error', () => {
+            bookshopError.classList.add('is-visible');
+        });
+    </script>
+</body>
+</html>

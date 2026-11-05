@@ -1377,3 +1377,75 @@ body.single-page-portfolio { background: var(--portfolio-ivory); color: var(--po
   .single-page-portfolio .contact-socials { gap: 20px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+/* ================================================================
+   BOOK SHOP 3D PROJECT — scoped additions; other pages untouched.
+   ================================================================ */
+.single-page-portfolio .bookshop-project-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #e5d4c1;
+    color: #705440;
+}
+.single-page-portfolio .bookshop-project-preview i { font-size: 48px; }
+.single-page-portfolio .bookshop-project-preview span { font-size: 13px; font-weight: 600; }
+.single-page-portfolio .bookshop-project-card .view-pill-btn {
+    background: #705440; color: #fffaf4; border-color: #705440;
+    text-align: center;
+}
+.single-page-portfolio .bookshop-project-card .view-pill-btn:hover {
+    background: #392b25;
+}
+
+/* Dedicated Book Shop page */
+.bookshop-detail-page { background: #f8f4ee; color: #392b25; }
+.bookshop-detail-page .bookshop-main {
+    max-width: 1120px; margin: 0 auto; padding: clamp(24px, 4vw, 60px) 20px 80px;
+}
+.bookshop-detail-page .bookshop-back {
+    display: inline-flex; align-items: center; gap: 9px;
+    color: #705440; text-decoration: none; font-size: 15px;
+    margin-bottom: 28px;
+}
+.bookshop-detail-page .bookshop-back:hover { text-decoration: underline; }
+.bookshop-detail-page .bookshop-heading { margin: 0 0 10px; font-size: clamp(34px, 5vw, 52px); }
+.bookshop-detail-page .bookshop-subtitle { color: #705440; font-size: 16px; margin: 0 0 18px; }
+.bookshop-detail-page .bookshop-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.bookshop-detail-page .bookshop-tags span {
+    background: #efe4d6; border: 1px solid #c5a382; padding: 5px 12px;
+    border-radius: 100px; font-size: 12px; font-weight: 600;
+}
+.bookshop-detail-page .bookshop-viewer-shell {
+    position: relative; background: #efe4d6; border: 1px solid #c5a382;
+    border-radius: 24px; overflow: hidden;
+}
+.bookshop-detail-page .bookshop-viewer {
+    display: block; width: 100%; height: min(70vh, 630px); min-height: 360px;
+    background: #efe4d6; --poster-color: #efe4d6;
+}
+.bookshop-detail-page .bookshop-loading {
+    color: #705440; font-size: 15px; padding: 20px; text-align: center;
+}
+.bookshop-detail-page .bookshop-hint {
+    padding: 14px 18px; text-align: center; font-size: 14px;
+    color: #705440; border-top: 1px solid #c5a382;
+}
+.bookshop-detail-page .bookshop-description {
+    max-width: 760px; margin-top: 40px; color: #705440;
+    font-size: 16px; line-height: 1.75;
+}
+.bookshop-detail-page .bookshop-description h2 { margin-bottom: 10px; font-size: 28px; }
+.bookshop-detail-page .bookshop-error {
+    display: none; padding: 12px 16px; background: #fff9f2;
+    color: #6b342a; border-top: 1px solid #c5a382; font-size: 14px;
+}
+.bookshop-detail-page .bookshop-error.is-visible { display: block; }
+@media (max-width: 600px) {
+    .bookshop-detail-page .bookshop-viewer { height: 440px; min-height: 320px; }
+    .bookshop-detail-page .bookshop-viewer-shell { border-radius: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .bookshop-detail-page .bookshop-viewer { scroll-behavior: auto; }
+}
