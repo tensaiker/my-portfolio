@@ -106,7 +106,8 @@
                 </button>
             </div>
 
-            <!-- LIVE 3D -->
+            <!-- LIVE 3D: Keep this source pointed to pizza_shop.glb,
+                 not a PNG image. -->
             <div id="live-panel" class="bookshop-demo-panel">
                 <div class="bookshop-viewer-shell">
 
@@ -139,7 +140,8 @@
                 </div>
             </div>
 
-            <!-- SCREENSHOT -->
+            <!-- SCREENSHOT: The PNG is inside assets/image/3d_shop_image/pizza_shop_image/.
+                 The file loads once when the visitor chooses Screenshots. -->
             <div id="screenshot-panel" class="bookshop-demo-panel" hidden>
                 <div class="bookshop-screenshot-wrap">
                     <img
@@ -152,7 +154,7 @@
                     <p id="render-error" class="bookshop-render-note" hidden>
                         The Pizza Shop screenshot could not load.
                         Check
-                        <code>assets/image/pizza_shop_image/pizza_shop.png</code>.
+                        <code>assets/image/3d_shop_image/pizza_shop_image/pizza_shop.png</code>.
                     </p>
                 </div>
             </div>
@@ -176,7 +178,12 @@
 
     </main>
 
-    <!-- PAGE-SPECIFIC SCRIPT -->
+    <!-- =========================================================
+         PROJECT SHOWCASE CONTROLS
+         This script belongs to this page only.
+         It switches between the live GLB and the render image;
+         no edits to script.js or Cozy Kana are necessary.
+         ========================================================= -->
     <script>
         (() => {
             "use strict";
@@ -193,7 +200,7 @@
             const renderError = document.getElementById("render-error");
 
             // Change only if you rename or move the screenshot
-            const RENDER_PATH = "assets/image/pizza_shop_image/pizza_shop.png";
+            const RENDER_PATH = "assets/image/3d_shop_image/pizza_shop_image/pizza_shop.png";
 
             let screenshotRequested = false;
 

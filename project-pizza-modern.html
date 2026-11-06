@@ -102,14 +102,18 @@
                 </button>
             </div>
 
-            <!-- LIVE 3D -->
+            <!-- LIVE 3D: The current file is named pizza_modern_glb (no .glb
+                 extension in the supplied VS Code screenshot).
+                 Keep src exactly matched to your file. For best hosting
+                 compatibility, rename the real file to pizza_modern.glb
+                 and THEN change src below to pizza_modern.glb. -->
             <div id="live-panel" class="bookshop-demo-panel">
                 <div class="bookshop-viewer-shell">
 
                     <model-viewer
                         id="project-model"
                         class="bookshop-viewer"
-                        src="assets/model/shop_3d_model/pizza_modern_glb"
+                        src="assets/model/shop_3d_model/pizza_modern.glb"
                         alt="Interactive modern low-poly Pizza Shop 3D model"
                         camera-controls
                         auto-rotate
@@ -135,7 +139,8 @@
                 </div>
             </div>
 
-            <!-- SCREENSHOT -->
+            <!-- SCREENSHOT: The PNG is inside assets/image/3d_shop_image/pizza_shop_image/.
+                 The file loads once when the visitor chooses Screenshots. -->
             <div id="screenshot-panel" class="bookshop-demo-panel" hidden>
                 <div class="bookshop-screenshot-wrap">
                     <img
@@ -148,7 +153,7 @@
                     <p id="render-error" class="bookshop-render-note" hidden>
                         The Modern Pizza Shop screenshot could not load.
                         Check
-                        <code>assets/image/pizza_shop_image/pizza_modern.png</code>.
+                        <code>assets/image/3d_shop_image/pizza_shop_image/pizza_modern.png</code>.
                     </p>
                 </div>
             </div>
@@ -172,7 +177,12 @@
 
     </main>
 
-    <!-- PAGE-SPECIFIC SCRIPT -->
+    <!-- =========================================================
+         PROJECT SHOWCASE CONTROLS
+         This script belongs to this page only.
+         It switches between the live GLB and the render image;
+         no edits to script.js or Cozy Kana are necessary.
+         ========================================================= -->
     <script>
         (() => {
             "use strict";
@@ -189,7 +199,7 @@
             const renderError = document.getElementById("render-error");
 
             // Change only if you rename or move the screenshot
-            const RENDER_PATH = "assets/image/pizza_shop_image/pizza_modern.png";
+            const RENDER_PATH = "assets/image/3d_shop_image/pizza_shop_image/pizza_modern.png";
 
             let screenshotRequested = false;
 
