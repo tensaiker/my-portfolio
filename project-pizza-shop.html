@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ==========================================
+         PIZZA SHOP PROJECT PAGE
+         Reuses your existing style.css
+         ========================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F8F4EE">
+    <meta name="description" content="Explore the Pizza Shop Blender project through a live 3D model and screenshots.">
+
+    <title>Pizza Shop | Kerby Cruz</title>
+
+    <!-- Existing site styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Interactive 3D model viewer -->
+    <script type="module"
+        src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js">
+    </script>
+
+    <!--
+        This keeps hidden panels hidden even if
+        your shared CSS uses flex or grid.
+    -->
+    <style>
+        .bookshop-detail-page [hidden] {
+            display: none !important;
+        }
+
+        .bookshop-detail-page .bookshop-render-image {
+            display: block;
+            max-width: 100%;
+            max-height: 600px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 14px;
+        }
+    </style>
+</head>
+
+<body class="single-page-portfolio bookshop-detail-page">
+
+    <!-- NAVIGATION -->
+    <nav class="site-nav" aria-label="Main navigation">
+        <a class="logo" href="index.html#home">
+            Kerby Cruz<span class="logo-period">.</span>
+        </a>
+
+        <div class="bookshop-back-navigation">
+            <a class="bookshop-back" href="index.html#projects" style="margin-bottom: 0;">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                Back to Projects
+            </a>
+        </div>
+    </nav>
+
+    <main class="bookshop-main">
+
+        <a class="bookshop-back" href="index.html#projects">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            All Projects
+        </a>
+
+        <h1 class="bookshop-heading">Pizza Shop</h1>
+
+        <p class="bookshop-subtitle">
+            A cozy low-poly pizza shop modeled in Blender.
+            Explore the 3D model interactively or view its rendered screenshot.
+        </p>
+
+        <div class="bookshop-tags" aria-label="Project technologies">
+            <span>Blender</span>
+            <span>3D Modeling</span>
+            <span>Low Poly</span>
+        </div>
+
+        <!-- LIVE DEMO + SCREENSHOTS -->
+        <section class="bookshop-demo-section" aria-label="Pizza Shop project showcase">
+
+            <div class="bookshop-demo-tabs" role="group" aria-label="Choose showcase mode">
+                <button
+                    type="button"
+                    id="show-live"
+                    class="bookshop-demo-tab is-active"
+                    aria-pressed="true"
+                    aria-controls="live-panel">
+                    <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                    Live 3D Demo
+                </button>
+
+                <button
+                    type="button"
+                    id="show-screenshot"
+                    class="bookshop-demo-tab"
+                    aria-pressed="false"
+                    aria-controls="screenshot-panel">
+                    <i class="fa-solid fa-image" aria-hidden="true"></i>
+                    Screenshots
+                </button>
+            </div>
+
+            <!-- LIVE 3D -->
+            <div id="live-panel" class="bookshop-demo-panel">
+                <div class="bookshop-viewer-shell">
+
+                    <model-viewer
+                        id="project-model"
+                        class="bookshop-viewer"
+                        src="assets/model/shop_3d_model/pizza_shop.glb"
+                        alt="Interactive low-poly Pizza Shop 3D model"
+                        camera-controls
+                        auto-rotate
+                        auto-rotate-delay="3000"
+                        rotation-per-second="10deg"
+                        interaction-prompt="auto"
+                        touch-action="pan-y"
+                        shadow-intensity="1"
+                        exposure="1"
+                        loading="lazy">
+                    </model-viewer>
+
+                    <p class="bookshop-hint">
+                        Drag to rotate · Scroll or pinch to zoom
+                    </p>
+
+                    <p id="model-error" class="bookshop-error" role="status">
+                        The 3D model could not load.
+                        Check
+                        <code>assets/model/shop_3d_model/pizza_shop.glb</code>
+                        and open this page with Live Server.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SCREENSHOT -->
+            <div id="screenshot-panel" class="bookshop-demo-panel" hidden>
+                <div class="bookshop-screenshot-wrap">
+                    <img
+                        id="project-render"
+                        class="bookshop-render-image"
+                        alt="Pizza Shop Blender render"
+                        decoding="async"
+                        hidden>
+
+                    <p id="render-error" class="bookshop-render-note" hidden>
+                        The Pizza Shop screenshot could not load.
+                        Check
+                        <code>assets/image/pizza_shop_image/pizza_shop.png</code>.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="bookshop-description" aria-labelledby="project-about-heading">
+            <h2 id="project-about-heading">About This Project</h2>
+
+            <p>
+                Pizza Shop is a low-poly Blender environment project
+                focused on stylized building design, composition,
+                and presentation.
+            </p>
+
+            <p>
+                This page lets visitors interact with the 3D model
+                directly and also view a rendered screenshot version.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- PAGE-SPECIFIC SCRIPT -->
+    <script>
+        (() => {
+            "use strict";
+
+            const liveButton = document.getElementById("show-live");
+            const screenshotButton = document.getElementById("show-screenshot");
+            const livePanel = document.getElementById("live-panel");
+            const screenshotPanel = document.getElementById("screenshot-panel");
+
+            const model = document.getElementById("project-model");
+            const modelError = document.getElementById("model-error");
+
+            const renderImage = document.getElementById("project-render");
+            const renderError = document.getElementById("render-error");
+
+            // Change only if you rename or move the screenshot
+            const RENDER_PATH = "assets/image/pizza_shop_image/pizza_shop.png";
+
+            let screenshotRequested = false;
+
+            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+            function loadScreenshot() {
+                if (screenshotRequested) return;
+
+                screenshotRequested = true;
+
+                renderImage.addEventListener("load", () => {
+                    renderImage.hidden = false;
+                    renderError.hidden = true;
+                }, { once: true });
+
+                renderImage.addEventListener("error", () => {
+                    renderImage.hidden = true;
+                    renderError.hidden = false;
+
+                    console.error("Pizza Shop screenshot failed to load:", RENDER_PATH);
+                }, { once: true });
+
+                renderImage.src = RENDER_PATH;
+            }
+
+            function updateRotation() {
+                model.autoRotate = !livePanel.hidden && !reducedMotion.matches;
+            }
+
+            function showMode(mode) {
+                const isLive = mode === "live";
+
+                livePanel.hidden = !isLive;
+                screenshotPanel.hidden = isLive;
+
+                liveButton.classList.toggle("is-active", isLive);
+                screenshotButton.classList.toggle("is-active", !isLive);
+
+                liveButton.setAttribute("aria-pressed", String(isLive));
+                screenshotButton.setAttribute("aria-pressed", String(!isLive));
+
+                updateRotation();
+
+                if (!isLive) {
+                    loadScreenshot();
+                }
+            }
+
+            liveButton.addEventListener("click", () => showMode("live"));
+            screenshotButton.addEventListener("click", () => showMode("screenshot"));
+
+            model.addEventListener("load", () => {
+                modelError.classList.remove("is-visible");
+            });
+
+            model.addEventListener("error", (event) => {
+                modelError.classList.add("is-visible");
+                console.error("Pizza Shop 3D model failed:", event.detail);
+            });
+
+            if (reducedMotion.addEventListener) {
+                reducedMotion.addEventListener("change", updateRotation);
+            }
+
+            showMode("live");
+        })();
+    </script>
+</body>
+</html>
