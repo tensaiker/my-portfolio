@@ -1615,3 +1615,110 @@ body.single-page-portfolio { background: var(--portfolio-ivory); color: var(--po
 @media (prefers-reduced-motion: reduce) {
     .bookshop-detail-page .bookshop-demo-tab { transition: none; }
 }
+
+
+/* ==========================================================================
+   PIZZA SHOP SCREENSHOT GALLERIES — 2 images per project
+   Applies to project-pizza-shop.html and project-pizza-modern.html only.
+
+   HTML supplies image paths in #screenshot-panel[data-images].
+   The page's inline JavaScript controls the arrows and image counter.
+   Do not add another gallery script to script.js.
+   ========================================================================== */
+
+/* Inactive screenshots and error messages must not occupy layout space.
+   This also guards against older display:flex rules in the shared stylesheet. */
+.bookshop-detail-page .pizza-gallery [hidden],
+.bookshop-detail-page .bookshop-demo-panel[hidden] {
+    display: none !important;
+}
+
+/* Fill the existing beige screenshot container without overflowing it. */
+.bookshop-detail-page .pizza-gallery {
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+}
+
+/* Give the left and right buttons a position relative to the image. */
+.bookshop-detail-page .pizza-gallery-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 320px;
+}
+
+/* Keep the entire Blender render visible (no cropping). */
+.bookshop-detail-page .pizza-gallery-stage .pizza-gallery-image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 14px;
+}
+
+/* Round previous / next buttons over the image. */
+.bookshop-detail-page .pizza-gallery-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    transform: translateY(-50%);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--bookshop-border, #C5A382);
+    border-radius: 50%;
+    background: var(--bookshop-cream, #FFFCF8);
+    color: var(--bookshop-brown, #705440);
+    box-shadow: 0 2px 10px rgba(57, 43, 37, 0.12);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.bookshop-detail-page .pizza-gallery-arrow.prev { left: 12px; }
+.bookshop-detail-page .pizza-gallery-arrow.next { right: 12px; }
+
+.bookshop-detail-page .pizza-gallery-arrow:hover:not(:disabled) {
+    background: #DFC9B3;
+}
+
+.bookshop-detail-page .pizza-gallery-arrow:focus-visible {
+    outline: 3px solid var(--bookshop-brown, #705440);
+    outline-offset: 3px;
+}
+
+.bookshop-detail-page .pizza-gallery-arrow:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Shows e.g. "1 / 2" below the active image. */
+.bookshop-detail-page .pizza-gallery-counter {
+    margin: 12px 0 0;
+    color: var(--bookshop-brown, #705440);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .bookshop-detail-page .pizza-gallery-stage { min-height: 220px; }
+    .bookshop-detail-page .pizza-gallery-stage .pizza-gallery-image {
+        max-height: 380px;
+    }
+    .bookshop-detail-page .pizza-gallery-arrow {
+        width: 38px;
+        height: 38px;
+    }
+    .bookshop-detail-page .pizza-gallery-arrow.prev { left: 4px; }
+    .bookshop-detail-page .pizza-gallery-arrow.next { right: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bookshop-detail-page .pizza-gallery-arrow { transition: none; }
+}

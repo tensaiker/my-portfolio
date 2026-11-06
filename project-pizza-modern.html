@@ -102,11 +102,9 @@
                 </button>
             </div>
 
-            <!-- LIVE 3D: The current file is named pizza_modern_glb (no .glb
-                 extension in the supplied VS Code screenshot).
-                 Keep src exactly matched to your file. For best hosting
-                 compatibility, rename the real file to pizza_modern.glb
-                 and THEN change src below to pizza_modern.glb. -->
+            <!-- LIVE 3D MODEL: already renamed to pizza_modern.glb.
+                 Keep this path identical to the real filename on disk.
+                 This must remain the GLB file, never a PNG screenshot. -->
             <div id="live-panel" class="bookshop-demo-panel">
                 <div class="bookshop-viewer-shell">
 
@@ -133,30 +131,82 @@
                     <p id="model-error" class="bookshop-error" role="status">
                         The 3D model could not load.
                         Check
-                        <code>assets/model/shop_3d_model/pizza_modern_glb</code>
+                        <code>assets/model/shop_3d_model/pizza_modern.glb</code>
                         and open this page with Live Server.
                     </p>
                 </div>
             </div>
 
-            <!-- SCREENSHOT: The PNG is inside assets/image/3d_shop_image/pizza_shop_image/.
-                 The file loads once when the visitor chooses Screenshots. -->
-            <div id="screenshot-panel" class="bookshop-demo-panel" hidden>
-                <div class="bookshop-screenshot-wrap">
-                    <img
-                        id="project-render"
-                        class="bookshop-render-image"
-                        alt="Modern Pizza Shop Blender render"
-                        decoding="async"
-                        hidden>
+            
+<!-- ==================================================
+     MODERN PIZZA SHOP SCREENSHOT GALLERY
 
-                    <p id="render-error" class="bookshop-render-note" hidden>
-                        The Modern Pizza Shop screenshot could not load.
-                        Check
-                        <code>assets/image/3d_shop_image/pizza_shop_image/pizza_modern.png</code>.
-                    </p>
-                </div>
+     These images belong to Modern Pizza Shop,
+     not the regular Pizza Shop.
+     ================================================== -->
+
+<div
+    id="screenshot-panel"
+    class="bookshop-demo-panel"
+    data-images="assets/image/3d_shop_image/pizza_shop_image/pizza_modern.png|assets/image/3d_shop_image/pizza_shop_image/pizza_modern_2.png"
+    hidden>
+
+    <div class="bookshop-screenshot-wrap">
+
+        <div class="pizza-gallery">
+
+            <div class="pizza-gallery-stage">
+
+                <!-- Previous image -->
+                <button
+                    type="button"
+                    id="prev-screenshot"
+                    class="pizza-gallery-arrow prev"
+                    aria-label="Previous screenshot">
+                    <i class="fa-solid fa-chevron-left"
+                       aria-hidden="true"></i>
+                </button>
+
+                <!-- Current image -->
+                <img
+                    id="project-render"
+                    class="bookshop-render-image pizza-gallery-image"
+                    alt="Modern Pizza Shop Blender render"
+                    decoding="async"
+                    hidden>
+
+                <!-- Next image -->
+                <button
+                    type="button"
+                    id="next-screenshot"
+                    class="pizza-gallery-arrow next"
+                    aria-label="Next screenshot">
+                    <i class="fa-solid fa-chevron-right"
+                       aria-hidden="true"></i>
+                </button>
+
             </div>
+
+            <p
+                id="screenshot-counter"
+                class="pizza-gallery-counter"
+                aria-live="polite">
+                1 / 2
+            </p>
+
+            <p
+                id="render-error"
+                class="bookshop-render-note"
+                hidden>
+                This screenshot could not be loaded.
+                Please check the image filename.
+            </p>
+
+        </div>
+
+    </div>
+</div>
+
 
         </section>
 
@@ -177,95 +227,275 @@
 
     </main>
 
-    <!-- =========================================================
-         PROJECT SHOWCASE CONTROLS
-         This script belongs to this page only.
-         It switches between the live GLB and the render image;
-         no edits to script.js or Cozy Kana are necessary.
-         ========================================================= -->
     <script>
-        (() => {
-            "use strict";
+      (() => {
+    "use strict";
 
-            const liveButton = document.getElementById("show-live");
-            const screenshotButton = document.getElementById("show-screenshot");
-            const livePanel = document.getElementById("live-panel");
-            const screenshotPanel = document.getElementById("screenshot-panel");
+    // ==========================================
+    // 1. GET PAGE ELEMENTS
+    // ==========================================
 
-            const model = document.getElementById("project-model");
-            const modelError = document.getElementById("model-error");
+    const liveButton =
+        document.getElementById("show-live");
 
-            const renderImage = document.getElementById("project-render");
-            const renderError = document.getElementById("render-error");
+    const screenshotButton =
+        document.getElementById("show-screenshot");
 
-            // Change only if you rename or move the screenshot
-            const RENDER_PATH = "assets/image/3d_shop_image/pizza_shop_image/pizza_modern.png";
+    const livePanel =
+        document.getElementById("live-panel");
 
-            let screenshotRequested = false;
+    const screenshotPanel =
+        document.getElementById("screenshot-panel");
 
-            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const model =
+        document.getElementById("project-model");
 
-            function loadScreenshot() {
-                if (screenshotRequested) return;
+    const modelError =
+        document.getElementById("model-error");
 
-                screenshotRequested = true;
+    const renderImage =
+        document.getElementById("project-render");
 
-                renderImage.addEventListener("load", () => {
-                    renderImage.hidden = false;
-                    renderError.hidden = true;
-                }, { once: true });
+    const renderError =
+        document.getElementById("render-error");
 
-                renderImage.addEventListener("error", () => {
-                    renderImage.hidden = true;
-                    renderError.hidden = false;
+    const previousButton =
+        document.getElementById("prev-screenshot");
 
-                    console.error("Modern Pizza Shop screenshot failed to load:", RENDER_PATH);
-                }, { once: true });
+    const nextButton =
+        document.getElementById("next-screenshot");
 
-                renderImage.src = RENDER_PATH;
-            }
+    const counter =
+        document.getElementById("screenshot-counter");
 
-            function updateRotation() {
-                model.autoRotate = !livePanel.hidden && !reducedMotion.matches;
-            }
+    // ==========================================
+    // 2. GALLERY CONFIGURATION
+    // ==========================================
 
-            function showMode(mode) {
-                const isLive = mode === "live";
+    /*
+      Read the image paths from data-images.
 
-                livePanel.hidden = !isLive;
-                screenshotPanel.hidden = isLive;
+      This lets Pizza Shop and Modern Pizza Shop
+      use the same JavaScript without mixing
+      their screenshots.
+    */
 
-                liveButton.classList.toggle("is-active", isLive);
-                screenshotButton.classList.toggle("is-active", !isLive);
+    const screenshots = screenshotPanel.dataset.images
+        .split("|")
+        .map(path => path.trim())
+        .filter(Boolean);
 
-                liveButton.setAttribute("aria-pressed", String(isLive));
-                screenshotButton.setAttribute("aria-pressed", String(!isLive));
+    // Reuse this page's project title in image descriptions.
+    const projectName = document.querySelector(".bookshop-heading")
+        ?.textContent.trim() || "3D project";
 
-                updateRotation();
+    let currentIndex = 0;
+    let screenshotRequested = false;
 
-                if (!isLive) {
-                    loadScreenshot();
-                }
-            }
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
 
-            liveButton.addEventListener("click", () => showMode("live"));
-            screenshotButton.addEventListener("click", () => showMode("screenshot"));
+    // ==========================================
+    // 3. SHOW CURRENT SCREENSHOT
+    // ==========================================
 
-            model.addEventListener("load", () => {
-                modelError.classList.remove("is-visible");
-            });
+    function showScreenshot(index) {
+        if (screenshots.length === 0) return;
 
-            model.addEventListener("error", (event) => {
-                modelError.classList.add("is-visible");
-                console.error("Modern Pizza Shop 3D model failed:", event.detail);
-            });
+        /*
+          Wrap around:
+          Previous on image 1 goes to the last image.
+          Next on the last image goes to image 1.
+        */
 
-            if (reducedMotion.addEventListener) {
-                reducedMotion.addEventListener("change", updateRotation);
-            }
+        currentIndex =
+            (index + screenshots.length) % screenshots.length;
 
-            showMode("live");
-        })();
+        const imagePath = screenshots[currentIndex];
+
+        // Hide the previous image while loading.
+        renderImage.hidden = true;
+        renderError.hidden = true;
+
+        // Update image description and counter.
+        renderImage.alt =
+            `${projectName} screenshot ${currentIndex + 1} of ${screenshots.length}`;
+
+        counter.textContent =
+            `${currentIndex + 1} / ${screenshots.length}`;
+
+        // Disable arrows if only one screenshot exists.
+        previousButton.disabled = screenshots.length < 2;
+        nextButton.disabled = screenshots.length < 2;
+
+        // Load the selected screenshot.
+        renderImage.src = imagePath;
+    }
+
+    // ==========================================
+    // 4. IMAGE LOADING EVENTS
+    // ==========================================
+
+    /*
+      Attach listeners only once rather than
+      adding new listeners every time an arrow
+      is clicked.
+    */
+
+    renderImage.addEventListener("load", () => {
+        renderImage.hidden = false;
+        renderError.hidden = true;
+    });
+
+    renderImage.addEventListener("error", () => {
+        renderImage.hidden = true;
+        renderError.hidden = false;
+
+        console.error(
+            "Screenshot failed to load:",
+            renderImage.src
+        );
+    });
+
+    // ==========================================
+    // 5. PREVIOUS / NEXT BUTTONS
+    // ==========================================
+
+    previousButton.addEventListener("click", () => {
+        showScreenshot(currentIndex - 1);
+    });
+
+    nextButton.addEventListener("click", () => {
+        showScreenshot(currentIndex + 1);
+    });
+
+    // ==========================================
+    // 6. AUTOMATIC 3D ROTATION
+    // ==========================================
+
+    function updateRotation() {
+        model.autoRotate =
+            !livePanel.hidden &&
+            !reducedMotion.matches;
+    }
+
+    // ==========================================
+    // 7. SWITCH BETWEEN DEMO AND SCREENSHOTS
+    // ==========================================
+
+    function showMode(mode) {
+        const isLive = mode === "live";
+
+        livePanel.hidden = !isLive;
+        screenshotPanel.hidden = isLive;
+
+        liveButton.classList.toggle(
+            "is-active",
+            isLive
+        );
+
+        screenshotButton.classList.toggle(
+            "is-active",
+            !isLive
+        );
+
+        liveButton.setAttribute(
+            "aria-pressed",
+            String(isLive)
+        );
+
+        screenshotButton.setAttribute(
+            "aria-pressed",
+            String(!isLive)
+        );
+
+        updateRotation();
+
+        /*
+          Only load the first screenshot when
+          Screenshots is opened for the first time.
+
+          Switching tabs later preserves
+          the previously selected image.
+        */
+
+        if (!isLive && !screenshotRequested) {
+            screenshotRequested = true;
+            showScreenshot(0);
+        }
+    }
+
+    // ==========================================
+    // 8. TAB BUTTON EVENTS
+    // ==========================================
+
+    liveButton.addEventListener("click", () => {
+        showMode("live");
+    });
+
+    screenshotButton.addEventListener("click", () => {
+        showMode("screenshot");
+    });
+
+    // ==========================================
+    // 9. KEYBOARD NAVIGATION
+    // ==========================================
+
+    document.addEventListener("keydown", (event) => {
+        // Only handle arrows in screenshot mode.
+        if (screenshotPanel.hidden) return;
+
+        // Do not interfere with text editing.
+        if (
+            event.target.closest(
+                "input, textarea, select, [contenteditable]"
+            )
+        ) {
+            return;
+        }
+
+        if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            showScreenshot(currentIndex - 1);
+        }
+
+        if (event.key === "ArrowRight") {
+            event.preventDefault();
+            showScreenshot(currentIndex + 1);
+        }
+    });
+
+    // ==========================================
+    // 10. MODEL LOADING EVENTS
+    // ==========================================
+
+    model.addEventListener("load", () => {
+        modelError.classList.remove("is-visible");
+    });
+
+    model.addEventListener("error", (event) => {
+        modelError.classList.add("is-visible");
+
+        console.error(
+            "3D model failed to load:",
+            event.detail
+        );
+    });
+
+    // Respect changes to reduced-motion settings.
+    reducedMotion.addEventListener?.(
+        "change",
+        updateRotation
+    );
+
+    // ==========================================
+    // 11. INITIAL STATE
+    // ==========================================
+
+    showMode("live");
+
+})();
     </script>
 </body>
 </html>
