@@ -1722,3 +1722,36 @@ body.single-page-portfolio { background: var(--portfolio-ivory); color: var(--po
 @media (prefers-reduced-motion: reduce) {
     .bookshop-detail-page .pizza-gallery-arrow { transition: none; }
 }
+
+
+/* ========================================================================== 
+   MINDSPRINT HOMEPAGE CARD ONLY
+   Keeps the two phone screenshots visible without changing other cards.
+   The dedicated project page uses mindsprint.css instead.
+   ========================================================================== */
+.single-page-portfolio .mindsprint-project-preview {
+    gap: 12px;
+    padding: 10px 18px;
+    background: #EFE3D5;
+}
+.single-page-portfolio .mindsprint-project-preview img {
+    width: auto;
+    height: 100%;
+    max-width: calc(50% - 6px);
+    object-fit: contain;
+    border-radius: 11px;
+    box-shadow: 0 3px 10px rgba(57, 43, 37, 0.15);
+}
+.single-page-portfolio .mindsprint-live-status {
+    background: #E3EBD9;
+    border-color: #8BA286;
+    color: #34563D;
+}
+.single-page-portfolio .mindsprint-project-card .view-pill-btn {
+    background: #705440;
+    border-color: #705440;
+    color: #FFFFFF;
+}
+.single-page-portfolio .mindsprint-project-card .view-pill-btn:hover {
+    background: #392B25;
+}

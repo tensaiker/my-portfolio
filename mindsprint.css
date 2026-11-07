@@ -1,0 +1,448 @@
+/* ============================================================================
+   MINDSPRINT — PROJECT DETAIL PAGE ONLY
+
+   Loaded by project-mindsprint.html after style.css.
+   All rules are scoped to .mindsprint-detail-page to protect Cozy Kana and 3D
+   pages. The homepage card has its own small, separate rules in style.css.
+
+   Palette: warm ivory, beige, cocoa, and espresso (matches your portfolio).
+   ============================================================================ */
+
+.mindsprint-detail-page {
+    --ms-bg: #F8F4EE;
+    --ms-paper: #FFFCF8;
+    --ms-sand: #EFE3D5;
+    --ms-oat: #E2CCB5;
+    --ms-brown: #705440;
+    --ms-dark: #392B25;
+    --ms-outline: #C4A387;
+    background: var(--ms-bg);
+    color: var(--ms-dark);
+}
+
+.mindsprint-detail-page [hidden] { display: none !important; }
+
+.mindsprint-detail-page .ms-header-back {
+    color: var(--ms-brown);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+.mindsprint-detail-page .ms-header-back:hover { text-decoration: underline; }
+.mindsprint-detail-page .ms-main {
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: clamp(32px, 5vw, 65px) 0 90px;
+}
+.mindsprint-detail-page .ms-crumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    color: var(--ms-brown);
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+.mindsprint-detail-page .ms-crumb:hover { text-decoration: underline; }
+.mindsprint-detail-page .ms-eyebrow,
+.mindsprint-detail-page .ms-section-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    color: var(--ms-brown);
+}
+.mindsprint-detail-page .ms-hero h1 {
+    margin: 12px 0 4px;
+    font: 700 clamp(44px, 6vw, 68px)/1.13 var(--font-heading, Georgia, serif);
+    color: var(--ms-dark);
+}
+.mindsprint-detail-page .ms-subtitle {
+    margin: 0 0 14px;
+    color: var(--ms-brown);
+    font-weight: 600;
+    font-size: clamp(17px, 2.5vw, 21px);
+}
+.mindsprint-detail-page .ms-intro,
+.mindsprint-detail-page .ms-body-copy {
+    max-width: 750px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ms-brown);
+}
+.mindsprint-detail-page .ms-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0 24px;
+}
+.mindsprint-detail-page .ms-tags span {
+    background: var(--ms-paper);
+    border: 1px solid var(--ms-outline);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.mindsprint-detail-page .ms-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+.mindsprint-detail-page .ms-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 45px;
+    padding: 11px 19px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform .2s ease, background-color .2s ease;
+}
+.mindsprint-detail-page .ms-button:hover { transform: translateY(-2px); }
+.mindsprint-detail-page .ms-button-primary {
+    background: var(--ms-brown);
+    color: white;
+    border: 1px solid var(--ms-brown);
+}
+.mindsprint-detail-page .ms-button-primary:hover { background: var(--ms-dark); }
+.mindsprint-detail-page .ms-button-outline {
+    background: var(--ms-paper);
+    color: var(--ms-dark);
+    border: 1px solid var(--ms-brown);
+}
+.mindsprint-detail-page .ms-button-outline:hover { background: var(--ms-sand); }
+
+/* Section layout */
+.mindsprint-detail-page .ms-section { margin-top: clamp(55px, 7vw, 90px); }
+.mindsprint-detail-page .ms-section h2 {
+    font-size: clamp(27px, 3.6vw, 38px);
+    margin: 9px 0 18px;
+}
+.mindsprint-detail-page .ms-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 16px;
+}
+.mindsprint-detail-page .ms-section-heading h2 { margin-bottom: 0; }
+.mindsprint-detail-page #showcase { scroll-margin-top: 95px; }
+
+/* Live Demo / Screenshots switch */
+.mindsprint-detail-page .ms-mode-switch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: var(--ms-paper);
+    border: 1px solid var(--ms-outline);
+    border-radius: 999px;
+    padding: 4px;
+}
+.mindsprint-detail-page .ms-mode {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    min-height: 42px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ms-dark);
+    cursor: pointer;
+    font: 600 13px var(--font-body, sans-serif);
+}
+.mindsprint-detail-page .ms-mode:hover:not(.is-active) { background: var(--ms-sand); }
+.mindsprint-detail-page .ms-mode.is-active { background: var(--ms-brown); color: white; }
+
+/* Horizontally scrollable screenshot categories */
+.mindsprint-detail-page .ms-categories {
+    display: flex;
+    gap: 9px;
+    overflow-x: auto;
+    padding: 7px 1px 14px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+.mindsprint-detail-page .ms-category {
+    white-space: nowrap;
+    min-height: 38px;
+    flex: 0 0 auto;
+    border: 1px solid var(--ms-outline);
+    border-radius: 999px;
+    padding: 8px 14px;
+    background: var(--ms-paper);
+    color: var(--ms-brown);
+    font: 600 13px var(--font-body, sans-serif);
+    cursor: pointer;
+}
+.mindsprint-detail-page .ms-category.is-active {
+    color: white;
+    border-color: var(--ms-brown);
+    background: var(--ms-brown);
+}
+
+/* Large gallery image (never crop portrait mobile screenshots) */
+.mindsprint-detail-page .ms-gallery-frame {
+    border: 1px solid var(--ms-outline);
+    background: var(--ms-sand);
+    border-radius: 24px;
+    overflow: hidden;
+}
+.mindsprint-detail-page .ms-image-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 480px;
+    padding: 18px 65px;
+    background: var(--ms-sand);
+}
+.mindsprint-detail-page .ms-image-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: zoom-in;
+}
+.mindsprint-detail-page .ms-image-button img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 550px;
+    object-fit: contain;
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(57,43,37,.13);
+}
+.mindsprint-detail-page .ms-gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid var(--ms-outline);
+    border-radius: 50%;
+    background: var(--ms-paper);
+    color: var(--ms-dark);
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(57,43,37,.12);
+}
+.mindsprint-detail-page .ms-gallery-arrow:hover:not(:disabled) { background: var(--ms-oat); }
+.mindsprint-detail-page .ms-gallery-arrow:disabled { opacity: .35; cursor: not-allowed; }
+.mindsprint-detail-page .ms-prev { left: 14px; }
+.mindsprint-detail-page .ms-next { right: 14px; }
+.mindsprint-detail-page .ms-image-error {
+    padding: 22px;
+    font-size: 14px;
+    text-align: center;
+    color: #8A392D;
+    overflow-wrap: anywhere;
+}
+.mindsprint-detail-page .ms-gallery-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 13px 20px;
+    background: var(--ms-paper);
+    border-top: 1px solid var(--ms-outline);
+    color: var(--ms-brown);
+    font-size: 14px;
+    font-weight: 700;
+}
+.mindsprint-detail-page .ms-thumbnails {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 17px 3px 11px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+.mindsprint-detail-page .ms-thumb {
+    flex: 0 0 105px;
+    width: 105px;
+    height: 137px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 6px;
+    border: 1px solid var(--ms-outline);
+    border-radius: 14px;
+    background: var(--ms-paper);
+    cursor: pointer;
+    color: var(--ms-dark);
+}
+.mindsprint-detail-page .ms-thumb.is-active {
+    border: 2px solid var(--ms-brown);
+    background: var(--ms-oat);
+    box-shadow: 0 3px 10px rgba(57,43,37,.12);
+}
+.mindsprint-detail-page .ms-thumb img {
+    width: 100%;
+    height: 89px;
+    object-fit: contain;
+    border-radius: 7px;
+    background: #FFF8EF;
+}
+.mindsprint-detail-page .ms-thumb span {
+    display: block;
+    max-width: 100%;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mindsprint-detail-page .ms-help { font-size: 13px; color: var(--ms-brown); margin-top: 4px; }
+
+/* The actual Flutter app is loaded on demand into a phone-shaped preview. */
+.mindsprint-detail-page .ms-live-surface {
+    display: grid;
+    grid-template-columns: minmax(0, 430px) minmax(230px, 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: clamp(20px, 5vw, 70px);
+    padding: clamp(18px, 4vw, 45px);
+    background: var(--ms-sand);
+    border: 1px solid var(--ms-outline);
+    border-radius: 24px;
+}
+.mindsprint-detail-page .ms-phone {
+    width: 100%;
+    max-width: 400px;
+    height: 660px;
+    overflow: hidden;
+    border: 6px solid var(--ms-dark);
+    border-radius: 32px;
+    background: var(--ms-paper);
+    box-shadow: 0 12px 30px rgba(57,43,37,.17);
+}
+.mindsprint-detail-page .ms-phone iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #F8F4EE;
+}
+.mindsprint-detail-page .ms-live-note h3 {
+    font: 700 28px var(--font-heading, Georgia, serif);
+    margin-bottom: 12px;
+}
+.mindsprint-detail-page .ms-live-note p {
+    font-size: 15px;
+    color: var(--ms-brown);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+.mindsprint-detail-page .ms-live-note .ms-small-note { font-size: 12px; margin: 16px 0 0; }
+
+/* Three feature cards, no changes to the site's other .project-card rules. */
+.mindsprint-detail-page .ms-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+.mindsprint-detail-page .ms-feature {
+    background: var(--ms-paper);
+    border: 1px solid var(--ms-outline);
+    border-radius: 20px;
+    padding: 24px;
+}
+.mindsprint-detail-page .ms-feature-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--ms-oat);
+    color: var(--ms-dark);
+    margin-bottom: 13px;
+}
+.mindsprint-detail-page .ms-feature h3 { font-size: 18px; margin-bottom: 9px; }
+.mindsprint-detail-page .ms-feature p { font-size: 14px; line-height: 1.7; color: var(--ms-brown); }
+.mindsprint-detail-page .ms-bottom-section { padding-bottom: 20px; }
+
+/* Full-size screenshot zoom dialog, closed with Escape or the X button. */
+.mindsprint-detail-page .ms-lightbox {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: min(95vw, 900px);
+    max-height: 95dvh;
+    border: 1px solid var(--ms-outline);
+    border-radius: 20px;
+    padding: 45px 16px 16px;
+    text-align: center;
+    background: var(--ms-paper);
+    color: var(--ms-dark);
+}
+.mindsprint-detail-page .ms-lightbox::backdrop { background: rgba(25, 17, 13, .78); }
+.mindsprint-detail-page .ms-lightbox img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 76dvh;
+    margin: 0 auto;
+    object-fit: contain;
+}
+.mindsprint-detail-page .ms-lightbox p { font-size: 13px; font-weight: 700; margin-top: 8px; }
+.mindsprint-detail-page .ms-close-lightbox {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--ms-outline);
+    border-radius: 50%;
+    background: var(--ms-sand);
+    cursor: pointer;
+}
+
+.mindsprint-detail-page :is(button, a):focus-visible {
+    outline: 3px solid var(--ms-brown);
+    outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+    .mindsprint-detail-page .ms-live-surface { grid-template-columns: 1fr; justify-items: center; }
+    .mindsprint-detail-page .ms-live-note { max-width: 500px; text-align: center; }
+    .mindsprint-detail-page .ms-features-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+    .mindsprint-detail-page .ms-main { width: calc(100% - 28px); padding-bottom: 65px; }
+    .mindsprint-detail-page .ms-hero h1 { font-size: 43px; }
+    .mindsprint-detail-page .ms-actions .ms-button { width: 100%; }
+    .mindsprint-detail-page .ms-section-heading { display: block; }
+    .mindsprint-detail-page .ms-mode-switch { margin-top: 16px; width: 100%; }
+    .mindsprint-detail-page .ms-mode { flex: 1 1 0; padding-inline: 7px; font-size: 12px; }
+    .mindsprint-detail-page .ms-image-stage { min-height: 350px; padding: 16px 39px; }
+    .mindsprint-detail-page .ms-image-button img { max-height: 460px; }
+    .mindsprint-detail-page .ms-gallery-arrow { width: 33px; height: 33px; }
+    .mindsprint-detail-page .ms-prev { left: 4px; }
+    .mindsprint-detail-page .ms-next { right: 4px; }
+    .mindsprint-detail-page .ms-gallery-frame, .mindsprint-detail-page .ms-live-surface { border-radius: 16px; }
+    .mindsprint-detail-page .ms-live-surface { padding: 10px; }
+    .mindsprint-detail-page .ms-phone { height: min(76dvh, 710px); min-height: 440px; border-width: 4px; border-radius: 22px; }
+    .mindsprint-detail-page .ms-header-back { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .mindsprint-detail-page .ms-button { transition: none; }
+}

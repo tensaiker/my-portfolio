@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#F8F4EE">
+    <meta name="description" content="Explore MindSprint, a cozy Flutter mental math app with customizable practice, four game challenges, and progress tracking.">
+    <title>MindSprint | Kerby Cruz Portfolio</title>
+
+    <!-- Existing portfolio styles (do not remove). -->
+    <link rel="stylesheet" href="style.css">
+    <!-- New styles are scoped to MindSprint, so other pages remain unchanged. -->
+    <link rel="stylesheet" href="mindsprint.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Gallery and tabs run on THIS page only; script.js stays untouched. -->
+    <script src="mindsprint.js" defer></script>
+</head>
+<body class="single-page-portfolio mindsprint-detail-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <!-- Small detail-page header. The homepage navigation isn't modified. -->
+    <nav class="site-nav" aria-label="Project navigation">
+        <a class="logo" href="index.html#home">Kerby Cruz<span class="logo-period">.</span></a>
+        <a class="ms-header-back" href="index.html#projects">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Projects
+        </a>
+    </nav>
+
+    <main id="main-content" class="ms-main">
+        <header class="ms-hero">
+            <a class="ms-crumb" href="index.html#projects">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> All Projects
+            </a>
+            <span class="ms-eyebrow">APPLICATION DEVELOPMENT · FLUTTER</span>
+            <h1>MindSprint</h1>
+            <p class="ms-subtitle">Mental Math Practice &amp; Challenge App</p>
+            <p class="ms-intro">
+                A cozy mental math app where learners can practice arithmetic at their own pace,
+                take on four different game challenges, and see how their performance improves.
+            </p>
+            <div class="ms-tags" aria-label="Project technologies">
+                <span>Flutter</span><span>Dart</span><span>Educational App</span><span>Game-Based Learning</span><span>UI/UX</span>
+            </div>
+            <div class="ms-actions">
+                <!-- VERIFIED DEPLOYMENT URL: replace only if your Vercel domain changes. -->
+                <a class="ms-button ms-button-primary" href="https://mindsprint-zeta.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Open Full Live App
+                </a>
+                <a class="ms-button ms-button-outline" href="#showcase">
+                    <i class="fa-regular fa-images" aria-hidden="true"></i> Explore Screenshots
+                </a>
+            </div>
+        </header>
+
+        <!-- SHOWCASE: screenshots are shown first to keep page loading fast.
+             The Flutter iframe loads ONLY when visitors click "Live Demo". -->
+        <section id="showcase" class="ms-section ms-showcase" aria-labelledby="ms-showcase-heading">
+            <div class="ms-section-heading">
+                <div>
+                    <span class="ms-section-kicker">EXPLORE THE APP</span>
+                    <h2 id="ms-showcase-heading">Interactive Showcase</h2>
+                </div>
+                <div class="ms-mode-switch" role="group" aria-label="Choose showcase mode">
+                    <button type="button" id="ms-tab-screenshots" class="ms-mode is-active" aria-controls="ms-screenshots" aria-pressed="true">
+                        <i class="fa-regular fa-images" aria-hidden="true"></i> Screenshots
+                    </button>
+                    <button type="button" id="ms-tab-live" class="ms-mode" aria-controls="ms-live" aria-pressed="false">
+                        <i class="fa-solid fa-play" aria-hidden="true"></i> Live Demo
+                    </button>
+                </div>
+            </div>
+
+            <div id="ms-screenshots" class="ms-showcase-panel">
+                <!-- Category controls filter the same screenshots; no duplicate images needed. -->
+                <div class="ms-categories" role="group" aria-label="Screenshot categories">
+                    <button type="button" class="ms-category is-active" data-category="all" aria-pressed="true">All Screens</button>
+                    <button type="button" class="ms-category" data-category="intro" aria-pressed="false">Introduction</button>
+                    <button type="button" class="ms-category" data-category="home" aria-pressed="false">Home &amp; Profile</button>
+                    <button type="button" class="ms-category" data-category="practice" aria-pressed="false">Practice</button>
+                    <button type="button" class="ms-category" data-category="rapid" aria-pressed="false">Rapid 10</button>
+                    <button type="button" class="ms-category" data-category="time" aria-pressed="false">Time Attack</button>
+                    <button type="button" class="ms-category" data-category="survival" aria-pressed="false">Survival</button>
+                    <button type="button" class="ms-category" data-category="perfect" aria-pressed="false">Perfect 10</button>
+                    <button type="button" class="ms-category" data-category="progress" aria-pressed="false">Progress</button>
+                </div>
+
+                <div class="ms-gallery-frame">
+                    <div class="ms-image-stage">
+                        <button type="button" id="ms-prev" class="ms-gallery-arrow ms-prev" aria-label="Previous screenshot">
+                            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <!-- Actual filename is from your existing mind_sprint_project_image folder. -->
+                        <button type="button" id="ms-zoom" class="ms-image-button" aria-label="Enlarge current screenshot">
+                            <img id="ms-main-image"
+                                 src="assets/image/mind_sprint_project_image/logo_and_splashscreen.jpeg"
+                                 alt="MindSprint logo and splash screen" decoding="async">
+                        </button>
+                        <button type="button" id="ms-next" class="ms-gallery-arrow ms-next" aria-label="Next screenshot">
+                            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                        <p id="ms-image-error" class="ms-image-error" role="status" hidden></p>
+                    </div>
+                    <div class="ms-gallery-meta" aria-live="polite">
+                        <span id="ms-image-label">MindSprint Logo &amp; Splash</span>
+                        <span id="ms-image-count">1 / 27</span>
+                    </div>
+                </div>
+                <!-- JS builds a clickable thumbnail for each screenshot in the chosen category. -->
+                <div id="ms-thumbnails" class="ms-thumbnails" aria-label="Choose a screenshot"></div>
+                <p class="ms-help">Use the arrows or choose a thumbnail. Select the large image to enlarge it.</p>
+            </div>
+
+            <div id="ms-live" class="ms-showcase-panel" hidden>
+                <div class="ms-live-surface">
+                    <div class="ms-phone">
+                        <!-- Delayed source: prevents loading the large Flutter web app unnecessarily. -->
+                        <iframe id="ms-live-frame"
+                                title="Play the MindSprint web application"
+                                data-src="https://mindsprint-zeta.vercel.app/"
+                                loading="lazy"
+                                allow="fullscreen"
+                                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    </div>
+                    <div class="ms-live-note">
+                        <h3>Try MindSprint</h3>
+                        <p>Practice or play a challenge directly in the preview. For more room, use the full-screen website link.</p>
+                        <a class="ms-button ms-button-primary" href="https://mindsprint-zeta.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            Open in New Tab <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                        <p class="ms-small-note">If your browser blocks embedded storage, use the full website for the best experience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECT STORY: grounded in the actual app screens you shared. -->
+        <section class="ms-section" aria-labelledby="ms-about-heading">
+            <span class="ms-section-kicker">PROJECT OVERVIEW</span>
+            <h2 id="ms-about-heading">About MindSprint</h2>
+            <p class="ms-body-copy">
+                MindSprint makes everyday arithmetic more engaging through short practice sessions,
+                selectable difficulty levels, timed questions, and game-inspired challenges. Users
+                can work with addition, subtraction, multiplication, division, and integers, then
+                review their results and track activity over time.
+            </p>
+        </section>
+
+        <section class="ms-section" aria-labelledby="ms-features-heading">
+            <span class="ms-section-kicker">WHAT YOU CAN DO</span>
+            <h2 id="ms-features-heading">Key Features</h2>
+            <div class="ms-features-grid">
+                <article class="ms-feature">
+                    <span class="ms-feature-icon"><i class="fa-solid fa-calculator" aria-hidden="true"></i></span>
+                    <h3>Custom Practice</h3>
+                    <p>Choose a math operation, difficulty, question count, and time limit for focused sessions.</p>
+                </article>
+                <article class="ms-feature">
+                    <span class="ms-feature-icon"><i class="fa-solid fa-gamepad" aria-hidden="true"></i></span>
+                    <h3>Four Game Modes</h3>
+                    <p>Take on Rapid 10, Time Attack, Survival, and Perfect 10—each with its own rules and goals.</p>
+                </article>
+                <article class="ms-feature">
+                    <span class="ms-feature-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span>
+                    <h3>Progress &amp; Results</h3>
+                    <p>Review accuracy, scores, streaks, and practice performance with a dedicated progress area.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="ms-section ms-bottom-section" aria-labelledby="ms-process-heading">
+            <span class="ms-section-kicker">DEVELOPMENT REFLECTION</span>
+            <h2 id="ms-process-heading">Design &amp; Development Focus</h2>
+            <p class="ms-body-copy">
+                The project brings together math question flows, configurable sessions, time-based
+                challenges, clear result screens, and a consistent cozy interface. The goal was to
+                make repeat practice feel approachable while still giving learners ways to challenge themselves.
+            </p>
+            <div class="ms-actions">
+                <a class="ms-button ms-button-outline" href="index.html#projects">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to All Projects
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Native dialog handles the image lightbox without altering existing site scripts. -->
+    <dialog id="ms-lightbox" class="ms-lightbox" aria-label="Enlarged MindSprint screenshot">
+        <button type="button" id="ms-close-lightbox" class="ms-close-lightbox" aria-label="Close enlarged screenshot">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+        <img id="ms-lightbox-image" alt="">
+        <p id="ms-lightbox-caption"></p>
+    </dialog>
+</body>
+</html>
