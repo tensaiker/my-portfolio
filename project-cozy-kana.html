@@ -464,134 +464,52 @@
 
 
 /* ===============================================================
-   COZY KANA ONLY — Project notes, accessible accordions and zoom.
-   These classes do not change other portfolio pages.
+   COZY KANA ONLY — Short project overview and reflection.
+   Shared MindSprint-style feature cards remain unchanged.
    =============================================================== */
-.kana-detail-page .kana-drive-disabled {
-    opacity:.58;
-    cursor:not-allowed;
+.kana-detail-page .kana-drive-disabled { opacity:.58; cursor:not-allowed; }
+.kana-detail-page .kana-copy {
+    max-width: 720px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ms-brown);
 }
-.kana-detail-page .kana-guide {
-    max-width:720px;
-    color:var(--ms-brown);
-    line-height:1.75;
-    font-size:14px;
-}
-.kana-detail-page .kana-details {
-    border-top:1px solid var(--ms-outline);
-    margin-top:18px;
-}
-.kana-detail-page .kana-accordion {
-    border-bottom:1px solid var(--ms-outline);
-    background:transparent;
-}
-.kana-detail-page .kana-accordion > summary {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:18px;
-    cursor:pointer;
-    list-style:none;
-    padding:19px 6px;
-    font-size:18px;
-    font-weight:700;
-}
-.kana-detail-page .kana-accordion > summary::-webkit-details-marker {display:none;}
-.kana-detail-page .kana-accordion > summary i {transition: transform .2s ease;}
-.kana-detail-page .kana-accordion[open] > summary i {transform:rotate(180deg);}
-.kana-detail-page .kana-accordion-body {
-    padding:0 6px 18px;
-    font-size:15px;
-    line-height:1.8;
-    color:var(--ms-brown);
-}
-.kana-detail-page .kana-accordion-body p {margin:0 0 12px;line-height:1.8;}
-.kana-detail-page .kana-accordion-body ul {padding-left:23px;margin:0;}
-.kana-detail-page .kana-accordion-body li {margin:0 0 15px;}
-.kana-detail-page .kana-accordion-body strong {color:var(--ms-dark);}
-.kana-detail-page .kana-accordion-body code {
-    font-size:.93em;
-    padding:2px 5px;
-    border-radius:5px;
-    background:var(--ms-sand);
-    overflow-wrap:anywhere;
-}
-.kana-detail-page .kana-accordion-head {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:12px;
-}
-.kana-detail-page .kana-toggle-all {
-    color:var(--ms-brown);
-    background:var(--ms-paper);
-    border:1px solid var(--ms-outline);
-    border-radius:999px;
-    padding:9px 15px;
-    font:600 13px var(--font-body, sans-serif);
-    cursor:pointer;
-}
-.kana-detail-page .kana-toggle-all:hover {background:var(--ms-sand);}
 .kana-detail-page .kana-page-footer {
-    margin-top:64px;
-    padding-top:25px;
-    border-top:1px solid var(--ms-outline);
+    margin-top: 64px;
+    padding-top: 25px;
+    border-top: 1px solid var(--ms-outline);
 }
 .kana-detail-page .kana-page-footer a {
-    color:var(--ms-brown);
-    font-weight:700;
-    text-decoration:underline;
-    text-underline-offset:4px;
+    color: var(--ms-brown);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
-/* Zoom controls and zoomable image are within the image dialog only. */
-.kana-detail-page .ms-lightbox {width:min(95vw,980px);}
+/* Lightbox: preserve existing zoom, drag, and fullscreen viewing. */
+.kana-detail-page .ms-lightbox { width:min(95vw,980px); }
 .kana-detail-page .kana-lightbox-tools {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-    padding:4px 0 13px;
+    display:flex; justify-content:center; align-items:center;
+    gap:10px; padding:4px 0 13px;
 }
 .kana-detail-page .kana-lightbox-tools button {
-    min-width:42px;
-    min-height:40px;
-    background:var(--ms-sand);
-    border:1px solid var(--ms-outline);
-    border-radius:999px;
-    cursor:pointer;
-    color:var(--ms-dark);
+    min-width:42px; min-height:40px; background:var(--ms-sand);
+    border:1px solid var(--ms-outline); border-radius:999px;
+    cursor:pointer; color:var(--ms-dark);
 }
 .kana-detail-page .kana-zoom-viewport {
-    overflow:hidden;
-    display:grid;
-    place-items:center;
-    height:min(65dvh,700px);
-    width:100%;
-    cursor:zoom-in;
-    border-radius:10px;
-    touch-action:pan-y;
+    overflow:hidden; display:grid; place-items:center;
+    height:min(65dvh,700px); width:100%; cursor:zoom-in;
+    border-radius:10px; touch-action:pan-y;
 }
-.kana-detail-page .kana-zoom-viewport.is-zoomed {cursor:grab;touch-action:none;}
-.kana-detail-page .kana-zoom-viewport.is-grabbing {cursor:grabbing;}
+.kana-detail-page .kana-zoom-viewport.is-zoomed { cursor:grab; touch-action:none; }
+.kana-detail-page .kana-zoom-viewport.is-grabbing { cursor:grabbing; }
 .kana-detail-page .kana-zoom-viewport img {
-    max-height:100%;
-    max-width:100%;
-    object-fit:contain;
-    user-select:none;
-    -webkit-user-drag:none;
-    transform-origin:center center;
-    box-shadow:none;
+    max-height:100%; max-width:100%; object-fit:contain;
+    user-select:none; -webkit-user-drag:none;
+    transform-origin:center center; box-shadow:none;
 }
-.kana-detail-page .ms-lightbox > p {margin:10px 0 0;}
-@media (max-width:520px) {
-    .kana-detail-page .kana-accordion > summary {font-size:16px;}
-    .kana-detail-page .kana-accordion-body {font-size:14px;}
-    .kana-detail-page .kana-zoom-viewport {height:60dvh;}
-}
-@media (prefers-reduced-motion:reduce) {
-    .kana-detail-page .kana-accordion > summary i {transition:none;}
-}
+.kana-detail-page .ms-lightbox > p { margin:10px 0 0; }
+@media(max-width:520px) { .kana-detail-page .kana-zoom-viewport { height:60dvh; } }
 
     </style>
 </head>
@@ -707,134 +625,50 @@
             </div>
         </section>
 
-        <!-- 3. FRIENDLY FEATURE SUMMARY: This is an introduction, not a replacement for the technical content. -->
+        <!-- 3. PROJECT OVERVIEW: concise summary matching MindSprint. -->
+        <section class="ms-section kana-overview" aria-labelledby="kana-overview-title">
+            <span class="ms-section-kicker">PROJECT OVERVIEW</span>
+            <h2 id="kana-overview-title">About Cozy Kana</h2>
+            <p class="kana-copy">
+                Cozy Kana makes learning Japanese characters approachable through short,
+                guided Hiragana and Katakana lessons. Learners can practice handwriting,
+                review vocabulary with flashcards and quizzes, and follow their progress
+                as they build confidence in reading and writing.
+            </p>
+        </section>
+
+        <!-- 4. KEY FEATURES: three clear cards, consistent with MindSprint. -->
         <section class="ms-section" aria-labelledby="kana-features-title">
-            <span class="ms-section-kicker">WHAT USERS CAN DO</span>
-            <h2 id="kana-features-title">Key Features at a Glance</h2>
+            <span class="ms-section-kicker">WHAT YOU CAN DO</span>
+            <h2 id="kana-features-title">Key Features</h2>
             <div class="ms-features-grid">
                 <article class="ms-feature">
                     <span class="ms-feature-icon"><i class="fa-solid fa-pen" aria-hidden="true"></i></span>
-                    <h3>Learn &amp; Write</h3>
-                    <p>Follow structured Hiragana and Katakana lessons and practice writing characters.</p>
+                    <h3>Guided Lessons &amp; Writing</h3>
+                    <p>Learn Hiragana and Katakana step by step, then practice tracing each character.</p>
                 </article>
                 <article class="ms-feature">
                     <span class="ms-feature-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></span>
-                    <h3>Practice &amp; Recall</h3>
-                    <p>Review using flashcards, vocabulary, word building, and quizzes.</p>
+                    <h3>Interactive Practice</h3>
+                    <p>Review through flashcards, word building, vocabulary activities, and quizzes.</p>
                 </article>
                 <article class="ms-feature">
                     <span class="ms-feature-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span>
-                    <h3>Follow Progress</h3>
-                    <p>Track lesson completion, personal learning progress, and practice activity.</p>
+                    <h3>Learning Progress</h3>
+                    <p>Keep track of completed lessons, learning activity, and character mastery.</p>
                 </article>
             </div>
         </section>
 
-        <!-- 4. ORIGINAL PROJECT CONTENT: All four full sections are preserved from your uploaded HTML. -->
-        <section class="ms-section" aria-labelledby="kana-details-title">
-            <div class="kana-accordion-head">
-                <div>
-                    <span class="ms-section-kicker">BEHIND THE PROJECT</span>
-                    <h2 id="kana-details-title">Project Details</h2>
-                </div>
-                <button id="kana-toggle-all" type="button" class="kana-toggle-all" aria-expanded="false">Expand all</button>
-            </div>
-            <p class="kana-guide">Read about the design decisions, technical challenges, features, and what I learned while developing Cozy Kana.</p>
-            <div class="kana-details">
-
-                <details class="kana-accordion" open>
-                    <summary>Project Overview <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
-                    <div class="kana-accordion-body">
-                        <p>
-                            A tactile, gamified Japanese language learning mobile application built with Flutter and Dart, designed to guide beginners through mastering Hiragana and Katakana. Inspired by a cozy pastel stationery aesthetic, the app bridges stroke-by-stroke handwriting practice, spaced repetition (SRS) flashcards, dynamic vocabulary building, and reactive mastery tracking into an interactive learning journey.
-                        </p>
-                    </div>
-                </details>
-
-                <details class="kana-accordion" >
-                    <summary>Technical Challenges <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
-                    <div class="kana-accordion-body">
-                        <ul class="content-list">
-<li>
-<strong>Dynamic Prerequisite Unlocking &amp; State Synchronization:</strong> 
-                                Designing a unified state management architecture (<code>ProgressService</code> with <code>ListenableBuilder</code>) so that completing writing lessons or quizzes reactively updates row locks, streak flames, weekly calendars, and flashcard availability across multiple tabs without UI lag or manual page reloads.
-                            </li>
-<li>
-<strong>Constrained Syllable &amp; Word Filtering:</strong> 
-                                Implementing an algorithm in <code>VocabularyService</code> that filters hundreds of vocabulary words dynamically, ensuring learners are only quizzed on words composed purely of characters they have already unlocked in previous lessons.
-                            </li>
-<li>
-<strong>Multi-Stage Handwriting Tracing:</strong> 
-                                Accurately resolving custom vector stroke paths and Unicode character variants (base, dakuon, handakuon, and small subscript yoon/sokuon) on a raw 2D canvas with real-time accuracy scoring.
-                            </li>
-<li>
-<strong>Consistent Offline Audio Delivery:</strong> 
-                                Integrating native Text-to-Speech (<code>flutter_tts</code>) while maintaining user-configured speech rates, volume levels, and master sound toggles across disparate modes (quizzes, flashcard flips, vocabulary dictionary, and writing prompts).
-                            </li>
-</ul>
-                    </div>
-                </details>
-
-                <details class="kana-accordion" >
-                    <summary>Key Features <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
-                    <div class="kana-accordion-body">
-                        <ul class="content-list">
-<li>
-<strong>Sequential Lesson Progression:</strong> 
-                                Structured unlocking system spanning Basic Kana, Dakuon, and Yoon contracted sounds, complete with celebration animations when clearing milestones.
-                            </li>
-<li>
-<strong>Interactive Stroke Tracing:</strong> 
-                                Real-time canvas for tracing kana characters with stroke order animations, vector path validation, and accuracy grading.
-                            </li>
-<li>
-<strong>SRS Flashcards &amp; Difficulty Integration:</strong> 
-                                3D perspective flippable flashcards with 4-stage recall ratings (<em>Again, Hard, Good, Easy</em>) that tag characters directly for tailored quiz sessions.
-                            </li>
-<li>
-<strong>Dynamic Word Builder Mini-Game:</strong> 
-                                Interactive syllable-tile assembly game with hints, instant TTS audio pronunciation, and difficulty adjustments based on unlocked kana.
-                            </li>
-<li>
-<strong>Offline Vocabulary Library:</strong> 
-                                Searchable Japanese word bank with English definitions, syllable breakdowns, and locked-word prerequisite prompts.
-                            </li>
-<li>
-<strong>Tactile 3D Stationery UI:</strong> 
-                                Custom design system featuring warm pastel cream/beige tones, mechanical button click depths, drop-shadow elevations, and haptic feedback.
-                            </li>
-<li>
-<strong>Developer &amp; Debug Toolkit:</strong> 
-                                Built-in dev panel in settings to simulate SRS ratings, toggle instant unlocks, and reset row checkpoints for live QA testing.
-                            </li>
-</ul>
-                    </div>
-                </details>
-
-                <details class="kana-accordion" >
-                    <summary>What I Have Learned <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
-                    <div class="kana-accordion-body">
-                        <ul class="content-list">
-<li>
-<strong>Reactive State Architecture:</strong> 
-                                Implementing decoupled, persistent state management in Flutter using <code>ListenableBuilder</code> and <code>SharedPreferences</code> without introducing unnecessary third-party overhead.
-                            </li>
-<li>
-<strong>Advanced Custom Canvas &amp; Animations:</strong> 
-                                Managing touch input streams, vector interpolation, and custom matrix transformations (<code>Matrix4</code> 3D perspective flips and tactile button presses).
-                            </li>
-<li>
-<strong>Gamified Educational UX:</strong> 
-                                Designing intrinsic motivation loops (daily streak counters, weekly activity dot matrices, and mastery percentages) to prevent cognitive overload in language acquisition.
-                            </li>
-<li>
-<strong>Clean Code &amp; Service Layering:</strong> 
-                                Structuring an extensible codebase with dedicated service singletons (<code>ProgressService</code>, <code>VocabularyService</code>, <code>TactileFeedback</code>) to cleanly separate domain data from UI screens.
-                            </li>
-</ul>
-                    </div>
-                </details>
-            </div>
+        <!-- 5. DEVELOPMENT REFLECTION: one short paragraph instead of long accordions. -->
+        <section class="ms-section kana-reflection" aria-labelledby="kana-reflection-title">
+            <span class="ms-section-kicker">DEVELOPMENT REFLECTION</span>
+            <h2 id="kana-reflection-title">Design &amp; Development Focus</h2>
+            <p class="kana-copy">
+                I focused on making character practice feel intuitive and rewarding while
+                connecting lessons, writing exercises, and review activities with progress
+                tracking. The app pairs a warm, tactile interface with an organized learning flow.
+            </p>
         </section>
         <footer class="kana-page-footer">
             <a href="index.html#projects"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to all projects</a>
@@ -1078,21 +912,7 @@
     zoomViewport.addEventListener('pointercancel', stopDragging);
     zoomViewport.addEventListener('lostpointercapture', stopDragging);
 
-    // Keep your four original sections and their expand/collapse behavior.
-    const sections = [...document.querySelectorAll('.kana-accordion')];
-    const allToggle = $('kana-toggle-all');
-    function updateAllToggle() {
-        const allOpen = sections.every(section => section.open);
-        allToggle.textContent = allOpen ? 'Collapse all' : 'Expand all';
-        allToggle.setAttribute('aria-expanded', String(allOpen));
-    }
-    allToggle.addEventListener('click', () => {
-        const shouldExpand = !sections.every(section => section.open);
-        sections.forEach(section => { section.open = shouldExpand; });
-        updateAllToggle();
-    });
-    sections.forEach(section => section.addEventListener('toggle', updateAllToggle));
-    updateAllToggle();
+    // Initialize the screenshot filters. The live demo and gallery remain unchanged.
     selectCategory('all');
 })();
     </script>
