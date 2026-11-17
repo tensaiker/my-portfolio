@@ -542,8 +542,8 @@
                 <span>UI/UX Design</span><span>2D &amp; Tactile UI</span>
             </div>
             <div class="ms-actions">
-                <!-- Keep the original Cozy Kana live demo link. -->
-                <a class="ms-button ms-button-primary" href="https://tensaiker.github.io/kana_learning/" target="_blank" rel="noopener noreferrer">
+                <!-- Cozy Kana is now hosted on Vercel. This button opens the full app. -->
+                <a class="ms-button ms-button-primary" href="https://cozy-kana.vercel.app/" target="_blank" rel="noopener noreferrer">
                     <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Open Full Live App
                 </a>
                 <a class="ms-button ms-button-outline" href="#showcase">
@@ -609,14 +609,14 @@
             <div id="kana-live" class="ms-showcase-panel" hidden>
                 <div class="ms-live-surface">
                     <div class="ms-phone">
-                        <!-- Keeps the original live Flutter app URL; loads only when Live Demo is clicked. -->
-                        <iframe id="kana-live-frame" title="Play Cozy Kana" data-src="https://tensaiker.github.io/kana_learning/"
+                        <!-- The Vercel-hosted Flutter app loads only when the Live Demo tab is selected. -->
+                        <iframe id="kana-live-frame" title="Play Cozy Kana" data-src="https://cozy-kana.vercel.app/"
                                 loading="lazy" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                     </div>
                     <div class="ms-live-note">
                         <h3>Try Cozy Kana</h3>
                         <p>Explore lessons, trace Japanese characters, and practice vocabulary inside the interactive preview.</p>
-                        <a class="ms-button ms-button-primary" href="https://tensaiker.github.io/kana_learning/" target="_blank" rel="noopener noreferrer">
+                        <a class="ms-button ms-button-primary" href="https://cozy-kana.vercel.app/" target="_blank" rel="noopener noreferrer">
                             Open in New Tab <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                         </a>
                         <p class="ms-small-note">The full site may provide a better experience for audio and browser storage.</p>
@@ -821,7 +821,7 @@
         shotsTab.classList.toggle('is-active', !isLive);
         liveTab.setAttribute('aria-pressed', String(isLive));
         shotsTab.setAttribute('aria-pressed', String(!isLive));
-        // The Flutter demo is loaded only after someone selects Live Demo.
+        // Performance: load the Vercel Flutter app only when Live Demo is selected.
         if (isLive && !iframeLoaded) {
             liveFrame.src = liveFrame.dataset.src;
             iframeLoaded = true;
